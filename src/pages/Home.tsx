@@ -15,6 +15,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import ImpactCounter from '../components/ImpactCounter';
+import { articlesData } from '../data/articles';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -29,34 +30,16 @@ export default function Home() {
   const articlesRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
 
-  const featuredArticles = [
-    {
-      id: 'connecting-the-campus',
-      title: 'Connecting the Campus: Building Digital Bridges for Rural Communities',
-      excerpt: "An inside look into LANI's computer literacy and hardware setup program helping students in remote communities transition to digital learning.",
-      category: 'Education',
-      date: 'June 12, 2026',
-      readTime: '5 min read',
-      image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800&auto=format&fit=crop',
-    },
-    {
-      id: 'beyond-balance-sheet',
-      title: 'Beyond the Balance Sheet: The True Value of Systems Capacity in Local NGOs',
-      excerpt: 'Why professional auditing models, template designs, and standard operating procedures are key to long-term community development success.',
-      category: 'Systems & Capacity',
-      date: 'May 28, 2026',
-      readTime: '6 min read',
-      image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=800&auto=format&fit=crop',
-    },
-    {
-      id: 'pathways-home-migrants',
-      title: 'Pathways Home: Successful Livelihood Integration for Returned Migrants',
-      excerpt: 'How offering vocational startup grants, carpentry equipment, and micro-grants creates sustainable independence for migrants resettling in West African settings.',
-      category: 'Livelihoods',
-      date: 'April 15, 2026',
-      readTime: '7 min read',
-      image: 'https://images.unsplash.com/photo-1464234471565-33b517abc292?q=80&w=800&auto=format&fit=crop',
-    }
+  const featuredArticles = articlesData.slice(0, 3);
+
+  const homepagePartners = [
+    { name: "IOM - UN Migration", category: "Development" },
+    { name: "Lagos State Govt", category: "Public Welfare" },
+    { name: "Cross River State Govt", category: "Emergency Recovery" },
+    { name: "Home of God’s Grace Orphanage", category: "Care Institution" },
+    { name: "Agnus Dei Orphanage", category: "Child Literacy" },
+    { name: "LANI Consulting", category: "Strategic Partner" },
+    { name: "JONAPWD West Africa", category: "Social Inclusion" }
   ];
 
   // Set document title for SEO
@@ -533,11 +516,13 @@ export default function Home() {
               >
                 <div>
                   <div className="relative h-44 overflow-hidden bg-stone-100">
-                    <img 
-                      src={art.image} 
-                      alt={art.title} 
-                      className="w-full h-full object-cover"
-                    />
+                    <Link to={`/articles/${art.id}`}>
+                      <img 
+                        src={art.image} 
+                        alt={art.title} 
+                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                      />
+                    </Link>
                     <span className="absolute top-3 left-3 bg-white/90 backdrop-blur border border-stone-200/40 text-lani-navy text-[9px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full shadow-sm">
                       {art.category}
                     </span>
@@ -550,7 +535,7 @@ export default function Home() {
                        <span>{art.readTime}</span>
                      </div>
                      <h3 className="font-heading text-base font-bold text-lani-navy leading-snug mb-2 hover:text-lani-primary transition-colors">
-                       <Link to={`/articles`}>{art.title}</Link>
+                       <Link to={`/articles/${art.id}`}>{art.title}</Link>
                      </h3>
                      <p className="text-stone-500 text-xs leading-relaxed line-clamp-3">
                        {art.excerpt}
@@ -560,7 +545,7 @@ export default function Home() {
 
                 <div className="p-6 pt-0 border-t border-stone-100 mt-2">
                   <Link 
-                    to={`/articles`} 
+                    to={`/articles/${art.id}`} 
                     className="text-xs font-bold text-lani-primary hover:underline flex items-center gap-1"
                   >
                     Read Article
@@ -569,6 +554,48 @@ export default function Home() {
                 </div>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* PARTNERS SECTION */}
+      <section className="py-20 bg-white border-t border-stone-150 text-left">
+        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12 text-center">
+          <span className="eyebrow mx-auto">Collaborative Network</span>
+          <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-lani-navy tracking-tight mt-3">
+            Strategic Partners & Stakeholders
+          </h2>
+          <p className="mx-auto max-w-xl mt-3 text-stone-500 text-xs sm:text-sm leading-relaxed mb-12">
+            We work with public institutions, care settings, development agencies, and civil society to protect dignity and empower lives.
+          </p>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-6 items-stretch">
+            {homepagePartners.map((partner, idx) => (
+              <div 
+                key={idx} 
+                className="bg-stone-50/50 border border-stone-200/50 rounded-2xl p-4 flex flex-col justify-center items-center text-center hover:bg-stone-50 hover:shadow-sm hover:border-lani-primary/20 transition-all duration-300 group"
+              >
+                <div className="h-10 w-10 rounded-full bg-lani-primary/10 flex items-center justify-center text-lani-primary group-hover:scale-105 transition-transform duration-300 mb-3">
+                  <Building2 className="h-5 w-5" />
+                </div>
+                <h4 className="font-heading text-xs font-bold text-lani-navy group-hover:text-lani-primary transition-colors leading-tight mb-1">
+                  {partner.name}
+                </h4>
+                <span className="text-[10px] text-stone-400 font-extrabold uppercase tracking-wider block">
+                  {partner.category}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-12">
+            <Link 
+              to="/partners" 
+              className="inline-flex items-center gap-2 text-xs font-extrabold text-lani-primary hover:text-lani-navy transition-colors group uppercase tracking-widest"
+            >
+              Explore Our Partners Page
+              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+            </Link>
           </div>
         </div>
       </section>

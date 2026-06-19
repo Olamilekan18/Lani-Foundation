@@ -63,6 +63,7 @@ export default function Navbar() {
     { name: 'About Us', path: '/about' },
     { name: 'Initiatives', path: '/initiatives' },
     { name: 'Articles', path: '/articles' },
+    { name: 'Partners', path: '/partners' },
     { name: 'Get Involved', path: '/get-involved' },
     { name: 'Contact', path: '/contact' },
   ];

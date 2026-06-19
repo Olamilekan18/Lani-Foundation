@@ -8,6 +8,8 @@ import Initiatives from './pages/Initiatives';
 import GetInvolved from './pages/GetInvolved';
 import Contact from './pages/Contact';
 import Articles from './pages/Articles';
+import ArticleDetail from './pages/ArticleDetail';
+import Partners from './pages/Partners';
 
 // ScrollToTop helper resets the viewport scroll coordinate to (0,0) on page routing.
 function ScrollToTop() {
@@ -32,6 +34,8 @@ export default function App() {
             <Route path="/about" element={<About />} />
             <Route path="/initiatives" element={<Initiatives />} />
             <Route path="/articles" element={<Articles />} />
+            <Route path="/articles/:id" element={<ArticleDetail />} />
+            <Route path="/partners" element={<Partners />} />
             <Route path="/get-involved" element={<GetInvolved />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>

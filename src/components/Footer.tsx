@@ -103,7 +103,7 @@ export default function Footer() {
                   <Link to="/articles" className="hover:text-white transition-colors">Read Articles & News</Link>
                 </li>
                 <li>
-                  <Link to="/about#leadership" className="hover:text-white transition-colors">Leadership Team</Link>
+                  <Link to="/partners" className="hover:text-white transition-colors">Partners & Network</Link>
                 </li>
                 <li>
                   <Link to="/get-involved" className="hover:text-white transition-colors">Volunteer Opportunities</Link>
