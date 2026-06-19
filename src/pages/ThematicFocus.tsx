@@ -1,6 +1,16 @@
 import { useState, useRef, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { Activity, Users, Award, BookOpen, ShieldCheck, HeartHandshake, Building2 } from 'lucide-react';
+import { useSearchParams, Link } from 'react-router-dom';
+import { 
+  Activity, 
+  Users, 
+  Award, 
+  BookOpen, 
+  ShieldCheck, 
+  HeartHandshake, 
+  Building2,
+  ArrowRight,
+  X 
+} from 'lucide-react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
@@ -20,6 +30,7 @@ export default function ThematicFocus() {
   const [searchParams, setSearchParams] = useSearchParams();
   const initialFilter = searchParams.get('focus') || 'all';
   const [filter, setFilter] = useState(initialFilter);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const gridRef = useRef<HTMLDivElement>(null);
 
   // Set document title for SEO
@@ -187,7 +198,11 @@ export default function ThematicFocus() {
         {/* Project grid (GSAP animated) */}
         <div ref={gridRef} className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {filteredProjects.map((proj, idx) => (
-            <div key={idx} className="premium-card flex flex-col justify-between">
+            <div 
+              key={idx} 
+              onClick={() => setSelectedProject(proj)}
+              className="premium-card flex flex-col justify-between cursor-pointer group relative hover:shadow-premium hover:-translate-y-0.5 transition-all duration-300"
+            >
               <div>
                 <div className="flex items-center justify-between gap-4 mb-6">
                   <span className="inline-flex items-center rounded-full bg-stone-100 px-3 py-1 text-xs font-bold text-stone-500 uppercase tracking-wider">
@@ -200,10 +215,31 @@ export default function ThematicFocus() {
                 <h3 className="font-heading text-lg font-bold text-lani-navy tracking-tight mb-2">
                   {proj.title}
                 </h3>
-                <p className="text-stone-600 text-xs sm:text-sm leading-relaxed mb-6">
-                  {proj.desc}
-                </p>
+                
+                {/* Description with Read More triggers */}
+                <div className="relative mb-6">
+                  <p className="text-stone-600 text-xs sm:text-sm leading-relaxed line-clamp-3 transition-opacity duration-300 lg:group-hover:opacity-20 pr-2">
+                    {proj.desc}
+                  </p>
+                  
+                  {/* Desktop absolute Read More overlay */}
+                  <div className="absolute inset-0 hidden lg:flex items-center justify-center pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-350">
+                    <span className="bg-lani-primary text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-md flex items-center gap-1">
+                      Read More
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </span>
+                  </div>
+
+                  {/* Mobile inline Read More button (since mobile has no hover) */}
+                  <div className="lg:hidden mt-2 flex justify-start">
+                    <span className="text-xs font-extrabold text-lani-primary flex items-center gap-1">
+                      Read More
+                      <ArrowRight className="h-3 w-3" />
+                    </span>
+                  </div>
+                </div>
               </div>
+              
               <div className="pt-4 border-t border-stone-50 text-xs text-stone-500 mt-auto">
                 <span className="block font-bold text-lani-navy uppercase tracking-wider text-[9px] mb-1">Impact Highlight</span>
                 <p className="font-medium text-stone-600 leading-snug">{proj.impact}</p>
@@ -212,6 +248,76 @@ export default function ThematicFocus() {
           ))}
         </div>
       </section>
+
+      {/* DETAILED PROJECT MODAL */}
+      {selectedProject && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-lani-navy/60 backdrop-blur-sm transition-all duration-300">
+          <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative border border-stone-200 text-left">
+            {/* Close button */}
+            <button 
+              onClick={() => setSelectedProject(null)}
+              className="absolute top-4 right-4 text-stone-400 hover:text-stone-700 bg-stone-100 hover:bg-stone-200 p-2 rounded-full transition-colors"
+              aria-label="Close details"
+            >
+              <X className="h-4 w-4" />
+            </button>
+
+            {/* Header info */}
+            <div className="flex items-center gap-3.5 mb-5 mt-2">
+              <div className="h-10 w-10 rounded-xl bg-lani-primary/10 text-lani-primary flex items-center justify-center shrink-0">
+                {selectedProject.icon}
+              </div>
+              <div>
+                <span className="inline-flex items-center rounded-full bg-stone-100 px-2.5 py-0.5 text-[10px] font-bold text-stone-500 uppercase tracking-wider">
+                  {selectedProject.tag}
+                </span>
+                <span className="text-[10px] font-bold text-stone-400 bg-stone-50 px-2 py-0.5 rounded border border-stone-100 ml-2">
+                  {selectedProject.period}
+                </span>
+              </div>
+            </div>
+
+            <h3 className="font-heading text-xl sm:text-2xl font-extrabold text-lani-navy tracking-tight mb-4">
+              {selectedProject.title}
+            </h3>
+
+            <div className="space-y-4">
+              <div>
+                <h4 className="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-1.5">Description</h4>
+                <p className="text-stone-600 text-xs sm:text-sm leading-relaxed">
+                  {selectedProject.desc}
+                </p>
+              </div>
+
+              <div className="bg-stone-50 rounded-2xl p-4 border border-stone-100/80">
+                <h4 className="text-[10px] font-black text-lani-navy uppercase tracking-widest mb-1 flex items-center gap-1.5">
+                  <Award className="h-3.5 w-3.5 text-lani-primary" />
+                  Impact Highlight
+                </h4>
+                <p className="text-stone-600 text-xs sm:text-sm font-medium leading-relaxed mt-1">
+                  {selectedProject.impact}
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-8 flex gap-3">
+              <Link 
+                to="/get-involved" 
+                onClick={() => setSelectedProject(null)}
+                className="btn-primary text-center flex-1 py-2"
+              >
+                Partner with Us
+              </Link>
+              <button 
+                onClick={() => setSelectedProject(null)}
+                className="btn-secondary flex-1 py-2 border-stone-300 text-stone-700 hover:bg-stone-50"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );
