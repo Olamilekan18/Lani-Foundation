@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Globe, Send, Mail, Phone, MapPin, Linkedin, Twitter, Instagram, ArrowUp } from 'lucide-react';
+import { Send, Mail, Phone, MapPin, Linkedin, Twitter, Instagram, ArrowUp } from 'lucide-react';
+import logoImg from '../assets/Lani-Founation Emblem.png';
 
 export default function Footer() {
   const [email, setEmail] = useState('');
@@ -54,9 +55,7 @@ export default function Footer() {
           {/* Brand Info */}
           <div className="lg:col-span-4 flex flex-col gap-6 text-left">
             <Link to="/" className="flex items-center gap-2.5">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-lani-primary text-white">
-                <Globe className="h-5 w-5" />
-              </div>
+              <img src={logoImg} alt="LANI Foundation Logo" className="h-10 w-auto object-contain" />
               <div className="flex flex-col">
                 <span className="font-heading text-base font-extrabold tracking-tight text-white leading-none">
                   LANI
@@ -97,7 +96,7 @@ export default function Footer() {
                   <Link to="/about" className="hover:text-white transition-colors">About Our Work</Link>
                 </li>
                 <li>
-                  <Link to="/initiatives" className="hover:text-white transition-colors">Our Initiatives</Link>
+                  <Link to="/thematic-focus" className="hover:text-white transition-colors">Our Thematic Focus</Link>
                 </li>
                 <li>
                   <Link to="/articles" className="hover:text-white transition-colors">Read Articles & News</Link>
@@ -113,20 +112,20 @@ export default function Footer() {
 
             <div>
               <h4 className="font-heading text-sm font-bold text-white uppercase tracking-wider">
-                Initiatives
+                Thematic Focus
               </h4>
               <ul className="mt-4 flex flex-col gap-2.5 text-sm">
                 <li>
-                  <Link to="/initiatives?focus=child-protection" className="hover:text-white transition-colors">Child Protection</Link>
+                  <Link to="/thematic-focus?focus=child-protection" className="hover:text-white transition-colors">Child Protection</Link>
                 </li>
                 <li>
-                  <Link to="/initiatives?focus=social-inclusion" className="hover:text-white transition-colors">Social Inclusion</Link>
+                  <Link to="/thematic-focus?focus=social-inclusion" className="hover:text-white transition-colors">Social Inclusion</Link>
                 </li>
                 <li>
-                  <Link to="/initiatives?focus=education" className="hover:text-white transition-colors">Education & Literacy</Link>
+                  <Link to="/thematic-focus?focus=education" className="hover:text-white transition-colors">Education & Literacy</Link>
                 </li>
                 <li>
-                  <Link to="/initiatives?focus=systems-capacity" className="hover:text-white transition-colors">Systems & Capacity</Link>
+                  <Link to="/thematic-focus?focus=systems-capacity" className="hover:text-white transition-colors">Systems & Capacity</Link>
                 </li>
               </ul>
             </div>

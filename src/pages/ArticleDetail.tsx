@@ -150,7 +150,7 @@ export default function ArticleDetail() {
           className="btn-primary py-3 px-8 text-xs justify-center w-full sm:w-auto flex items-center gap-2"
         >
           <BookOpen className="h-4 w-4" />
-          Support Our Initiatives
+          Support Our Thematic Focus
         </Link>
       </div>
 

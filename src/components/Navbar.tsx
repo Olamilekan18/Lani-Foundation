@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { Menu, X, Heart, Globe, ArrowRight } from 'lucide-react';
+import { Menu, X, Heart, ArrowRight } from 'lucide-react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import logoImg from '../assets/Lani-Founation Emblem.png';
 
 gsap.registerPlugin(useGSAP);
 
@@ -61,7 +62,7 @@ export default function Navbar() {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'About Us', path: '/about' },
-    { name: 'Initiatives', path: '/initiatives' },
+    { name: 'Thematic Focus', path: '/thematic-focus' },
     { name: 'Articles', path: '/articles' },
     { name: 'Partners', path: '/partners' },
     { name: 'Get Involved', path: '/get-involved' },
@@ -77,9 +78,7 @@ export default function Navbar() {
         <div className="flex h-20 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2.5 group">
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-lani-primary text-white shadow-md transition-transform duration-300 group-hover:scale-105">
-              <Globe className="h-6 w-6 animate-pulse" />
-            </div>
+            <img src={logoImg} alt="LANI Foundation Logo" className="h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105" />
             <div className="flex flex-col">
               <span className="font-heading text-lg font-extrabold tracking-tight text-lani-navy leading-none">
                 LANI

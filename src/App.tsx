@@ -4,7 +4,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
-import Initiatives from './pages/Initiatives';
+import ThematicFocus from './pages/ThematicFocus';
 import GetInvolved from './pages/GetInvolved';
 import Contact from './pages/Contact';
 import Articles from './pages/Articles';
@@ -32,7 +32,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="/initiatives" element={<Initiatives />} />
+            <Route path="/thematic-focus" element={<ThematicFocus />} />
             <Route path="/articles" element={<Articles />} />
             <Route path="/articles/:id" element={<ArticleDetail />} />
             <Route path="/partners" element={<Partners />} />

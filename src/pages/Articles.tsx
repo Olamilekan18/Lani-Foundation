@@ -49,7 +49,7 @@ export default function Articles() {
             Lani Articles & Research
           </h1>
           <p className="text-stone-600 text-sm sm:text-base leading-relaxed max-w-2xl mt-4">
-            Explore stories of impact, policy briefs, NGO capacity research, and development studies from our initiatives in local communities.
+            Explore stories of impact, policy briefs, NGO capacity research, and development studies from our thematic focus areas in local communities.
           </p>
         </div>
       </section>

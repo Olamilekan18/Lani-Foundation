@@ -16,7 +16,7 @@ interface Project {
   icon: React.ReactNode;
 }
 
-export default function Initiatives() {
+export default function ThematicFocus() {
   const [searchParams, setSearchParams] = useSearchParams();
   const initialFilter = searchParams.get('focus') || 'all';
   const [filter, setFilter] = useState(initialFilter);
@@ -24,7 +24,7 @@ export default function Initiatives() {
 
   // Set document title for SEO
   useEffect(() => {
-    document.title = "What We Do | LANI Foundation Focus Areas";
+    document.title = "What We Do | LANI Foundation Thematic Focus";
   }, []);
 
   const categories = [
@@ -212,8 +212,6 @@ export default function Initiatives() {
           ))}
         </div>
       </section>
-
-
 
     </div>
   );

@@ -305,8 +305,8 @@ export default function Home() {
                 Partner With Us
                 <HeartHandshake className="h-4 w-4" />
               </Link>
-              <Link to="/initiatives" className="btn-secondary">
-                View Our Programmes
+              <Link to="/thematic-focus" className="btn-secondary">
+                View Our Thematic Focus
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
@@ -427,10 +427,10 @@ export default function Home() {
                 </p>
               </div>
               <Link 
-                to="/initiatives" 
+                to="/thematic-focus" 
                 className="inline-flex items-center gap-1.5 text-xs font-bold text-lani-primary hover:text-lani-navy transition-colors group mt-auto"
               >
-                Explore programmes
+                Explore focus areas
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
               </Link>
             </div>

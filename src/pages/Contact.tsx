@@ -56,7 +56,7 @@ export default function Contact() {
             Let's Start a Conversation
           </h1>
           <p className="text-stone-600 text-sm sm:text-base leading-relaxed max-w-2xl mt-4">
-            Have questions about our initiatives, partnership programs, or want to explore sponsorships? Send us a message or visit our Ikeja, Lagos office.
+            Have questions about our thematic focus, partnership programs, or want to explore sponsorships? Send us a message or visit our Ikeja, Lagos office.
           </p>
         </div>
       </section>
