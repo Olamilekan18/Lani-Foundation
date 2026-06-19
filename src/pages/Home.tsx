@@ -1,16 +1,15 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  GraduationCap, 
-  Leaf, 
   Briefcase, 
-  Activity, 
   Users, 
   ArrowRight, 
   Award, 
   Building2, 
   Globe2, 
-  HeartHandshake 
+  HeartHandshake,
+  ShieldCheck,
+  BookOpen
 } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -23,24 +22,59 @@ export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
   const heroContentRef = useRef<HTMLDivElement>(null);
   const heroImageRef = useRef<HTMLDivElement>(null);
-  const focusRef = useRef<HTMLDivElement>(null);
+  const whoWeAreRef = useRef<HTMLDivElement>(null);
+  const missionRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
   const timelineLineRef = useRef<HTMLDivElement>(null);
+  const articlesRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
+
+  const featuredArticles = [
+    {
+      id: 'connecting-the-campus',
+      title: 'Connecting the Campus: Building Digital Bridges for Rural Communities',
+      excerpt: "An inside look into LANI's computer literacy and hardware setup program helping students in remote communities transition to digital learning.",
+      category: 'Education',
+      date: 'June 12, 2026',
+      readTime: '5 min read',
+      image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800&auto=format&fit=crop',
+    },
+    {
+      id: 'beyond-balance-sheet',
+      title: 'Beyond the Balance Sheet: The True Value of Systems Capacity in Local NGOs',
+      excerpt: 'Why professional auditing models, template designs, and standard operating procedures are key to long-term community development success.',
+      category: 'Systems & Capacity',
+      date: 'May 28, 2026',
+      readTime: '6 min read',
+      image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=800&auto=format&fit=crop',
+    },
+    {
+      id: 'pathways-home-migrants',
+      title: 'Pathways Home: Successful Livelihood Integration for Returned Migrants',
+      excerpt: 'How offering vocational startup grants, carpentry equipment, and micro-grants creates sustainable independence for migrants resettling in West African settings.',
+      category: 'Livelihoods',
+      date: 'April 15, 2026',
+      readTime: '7 min read',
+      image: 'https://images.unsplash.com/photo-1464234471565-33b517abc292?q=80&w=800&auto=format&fit=crop',
+    }
+  ];
+
+  // Set document title for SEO
+  useEffect(() => {
+    document.title = "LANI Foundation | Empowering Lives & Strengthening Communities";
+  }, []);
 
   // Hero animations on load
   useGSAP(() => {
     if (!heroContentRef.current || !heroImageRef.current) return;
     
     const ctx = gsap.context(() => {
-      // Fade in main elements
       gsap.fromTo(
         heroContentRef.current!.children,
         { opacity: 0, y: 30 },
         { opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out' }
       );
       
-      // Slide and scale hero images
       gsap.fromTo(
         heroImageRef.current,
         { opacity: 0, scale: 0.95, x: 30 },
@@ -51,11 +85,33 @@ export default function Home() {
     return () => ctx.revert();
   }, { scope: heroRef });
 
-  // Focus Cards scroll reveals
+  // Who We Are scroll reveal
   useGSAP(() => {
-    if (!focusRef.current) return;
+    if (!whoWeAreRef.current) return;
+    
+    gsap.fromTo(
+      whoWeAreRef.current.children,
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: whoWeAreRef.current,
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+        }
+      }
+    );
+  }, { scope: whoWeAreRef });
 
-    const cards = focusRef.current.querySelectorAll('.premium-card');
+  // Mission Cards scroll reveals
+  useGSAP(() => {
+    if (!missionRef.current) return;
+
+    const cards = missionRef.current.querySelectorAll('.premium-card');
     
     gsap.fromTo(
       cards,
@@ -67,19 +123,18 @@ export default function Home() {
         stagger: 0.12,
         ease: 'power2.out',
         scrollTrigger: {
-          trigger: focusRef.current,
+          trigger: missionRef.current,
           start: 'top 80%',
           toggleActions: 'play none none none',
         },
       }
     );
-  }, { scope: focusRef });
+  }, { scope: missionRef });
 
   // Scroll Triggered Timeline Progress Line & Milestones
   useGSAP(() => {
     if (!timelineRef.current || !timelineLineRef.current) return;
 
-    // Draw the line down as the user scrolls
     gsap.fromTo(
       timelineLineRef.current,
       { scaleY: 0 },
@@ -95,7 +150,6 @@ export default function Home() {
       }
     );
 
-    // Animate each timeline card individually as they enter
     const items = timelineRef.current.querySelectorAll('.timeline-item');
     items.forEach((item) => {
       const isLeft = item.classList.contains('item-left');
@@ -120,7 +174,7 @@ export default function Home() {
     });
   }, { scope: timelineRef });
 
-  // Call to action hover glow
+  // Call to action reveal
   useGSAP(() => {
     if (!ctaRef.current) return;
     
@@ -140,36 +194,102 @@ export default function Home() {
     );
   }, { scope: ctaRef });
 
-  const focusAreas = [
+  // Articles scroll reveal
+  useGSAP(() => {
+    if (!articlesRef.current) return;
+    
+    gsap.fromTo(
+      articlesRef.current.querySelectorAll('.article-card'),
+      { opacity: 0, y: 35 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        stagger: 0.12,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: articlesRef.current,
+          start: 'top 85%',
+        }
+      }
+    );
+  }, { scope: articlesRef });
+
+  const missionAreas = [
     {
-      title: 'Educational Excellence',
-      desc: 'Advancing research and funding student education. Home of the prestigious Angeline Uyi Bassey (AUB) Prize.',
-      icon: <GraduationCap className="h-6 w-6" />,
+      title: 'Protecting Vulnerable Children and Families',
+      desc: 'We support safer environments for children and families by strengthening care systems, caregiver capacity, child welfare documentation, emergency preparedness, and education support for children in vulnerable settings.',
+      icon: <ShieldCheck className="h-6 w-6" />,
       color: 'border-l-4 border-l-lani-primary',
     },
     {
-      title: 'Entrepreneurship & Grants',
-      desc: 'Supporting innovators, micro-enterprises, and smallholder farmers with early-stage business grants and mentorship.',
+      title: 'Empowering Youth and Women',
+      desc: 'We support youth, women, and widows with skills, mentorship, livelihood pathways, entrepreneurship support, confidence-building, and access to opportunities that promote self-reliance.',
       icon: <Briefcase className="h-6 w-6" />,
       color: 'border-l-4 border-l-lani-green',
     },
     {
-      title: 'Climate & Sustainability',
-      desc: 'Promoting reforestation, solar energy advocacy, and green-economy skills for youths across Nigeria.',
-      icon: <Leaf className="h-6 w-6" />,
+      title: 'Supporting Returned Migrants and Vulnerable Households',
+      desc: 'We support reintegration, livelihood recovery, community support, and practical pathways for returned migrants and vulnerable households affected by poverty, displacement, exclusion, or unsafe migration risks.',
+      icon: <HeartHandshake className="h-6 w-6" />,
       color: 'border-l-4 border-l-lani-emerald',
     },
     {
-      title: 'Health & Advocacy',
-      desc: 'Running community outreach clinics, health advocacy, and maternal health funding for under-resourced communities.',
-      icon: <Activity className="h-6 w-6" />,
+      title: 'Advancing Education and Literacy',
+      desc: 'We promote literacy, learning resources, reading culture, non-formal education support, educator capacity, and mentorship so underserved learners can access stronger pathways to opportunity.',
+      icon: <BookOpen className="h-6 w-6" />,
       color: 'border-l-4 border-l-lani-blue',
     },
     {
-      title: 'Social Reintegration',
-      desc: 'Empowering displaced youth and vulnerable demographics with skills and pathways to build sustainable livelihoods.',
-      icon: <Users className="h-6 w-6" />,
+      title: 'Strengthening Institutions and Community Systems',
+      desc: 'We help care structures, community organisations, educators, media actors, and public-facing institutions improve documentation, reporting, data practices, accountability, and service delivery.',
+      icon: <Building2 className="h-6 w-6" />,
       color: 'border-l-4 border-l-lani-gold',
+    },
+    {
+      title: 'Building Resilient Communities',
+      desc: 'We work with partners and community actors to strengthen recovery, wellbeing, livelihoods, social justice, and local ownership so communities are better prepared to sustain change.',
+      icon: <Users className="h-6 w-6" />,
+      color: 'border-l-4 border-l-stone-400',
+    },
+  ];
+
+  const historicMilestones = [
+    {
+      period: '2012–2013',
+      title: 'Mapping of Children’s Homes, Lagos State',
+      desc: 'We conducted comprehensive operational mapping and structural field assessment of orphanage and care homes across Lagos State. The work gathered granular data to identify infrastructure gaps, resource shortfalls, caregiver needs, and the realities of institutionalised children.',
+      color: 'bg-lani-primary',
+    },
+    {
+      period: '2013',
+      title: 'Caregiver CPR, First Aid & Emergency Training',
+      desc: 'We designed and implemented professional training in CPR, basic first aid, and disaster preparedness for care-home staff. The intervention also included the distribution of emergency first-aid boxes across participating care settings.',
+      color: 'bg-lani-green',
+    },
+    {
+      period: '2013–2014',
+      title: 'Disability-Sensitive Media Training',
+      desc: 'We conducted specialised training for journalists and media professionals on disability-sensitive reporting, respectful terminology, ethical storytelling, and dignity-based public communication to challenge stigma and harmful narratives.',
+      color: 'bg-lani-emerald',
+    },
+    {
+      period: '2016–2019',
+      title: 'Orphanage Library and Literacy Initiatives',
+      desc: 'We launched education enrichment initiatives, including a major library setup project at Home of God’s Grace Mission Orphanage and book donations at Agnus Dei Orphanage. We also conducted reading sessions to support long-term learning culture.',
+      color: 'bg-lani-blue',
+    },
+    {
+      period: '2020',
+      title: 'COVID-19 Risk Communication & Rebuild Calabar',
+      desc: 'We deployed risk communication training frameworks for journalists to support responsible reporting, and participated as a founding coalition partner in the post-crisis Rebuild Calabar Initiative supporting local economic recovery.',
+      color: 'bg-lani-gold',
+    },
+    {
+      period: '2021–Present',
+      title: 'Systems Strengthening and Process Reform',
+      desc: 'We have focused on supporting informal care structures and community organisations to move toward more standardised, transparent, and audit-ready service models. This includes data collection, indicators, and impact templates.',
+      color: 'bg-stone-400',
     },
   ];
 
@@ -181,21 +301,20 @@ export default function Home() {
         ref={heroRef} 
         className="relative overflow-hidden bg-gradient-to-b from-[#fdfbf7] via-[#f7f4ed] to-[#fdfbf7] py-20 lg:py-28"
       >
-        {/* Subtle abstract backdrop */}
         <div className="absolute top-0 right-0 -z-10 h-[500px] w-[500px] rounded-full bg-lani-primary/5 blur-3xl" />
         <div className="absolute bottom-0 left-0 -z-10 h-[400px] w-[400px] rounded-full bg-lani-green/5 blur-3xl" />
 
         <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12 grid gap-16 lg:grid-cols-12 items-center text-left">
           {/* Hero Content */}
-          <div ref={heroContentRef} className="lg:col-span-7 flex flex-col gap-6">
-            <span className="eyebrow">Lani Foundation • Impact & Advocacy</span>
+          <div ref={heroContentRef} className="lg:col-span-6 flex flex-col gap-6">
+            <span className="eyebrow">Lani Foundation • Member of LANI Group</span>
             
             <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-black text-lani-navy tracking-tight leading-[1.1]">
-              Empowering <span className="text-lani-primary">Communities</span>, Sustaining Our <span className="text-lani-green">Future</span>.
+              Honouring a Legacy. <span className="text-lani-primary">Empowering Lives.</span> Strengthening Communities.
             </h1>
             
             <p className="font-sans text-base sm:text-lg text-stone-600 leading-relaxed max-w-2xl">
-              We are the non-profit arm of LANI Group, dedicated to driving social transformation across Africa through targeted programs in education, youth entrepreneurship, health, and climate advocacy.
+              LANI Foundation works with communities, institutions, and partners to protect vulnerable people, expand opportunity, strengthen systems, and support sustainable development. We turn compassion into structured action by delivering inclusive programmes.
             </p>
             
             <div className="flex flex-wrap gap-4 pt-2">
@@ -204,31 +323,29 @@ export default function Home() {
                 <HeartHandshake className="h-4 w-4" />
               </Link>
               <Link to="/initiatives" className="btn-secondary">
-                View Initiatives
+                View Our Programmes
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </div>
 
-          {/* Hero Composite Image (Visually Wowing) */}
-          <div ref={heroImageRef} className="lg:col-span-5 relative">
-            <div className="relative mx-auto w-full max-w-[400px] sm:max-w-[450px]">
-              {/* Back card border effect */}
+          {/* Hero Composite Image */}
+          <div ref={heroImageRef} className="lg:col-span-6 relative">
+            <div className="relative mx-auto w-full max-w-[500px] lg:max-w-none">
               <div className="absolute -inset-2.5 rounded-3xl bg-gradient-to-tr from-lani-primary/30 to-lani-green/10 blur-xl opacity-75" />
               
-              {/* Main Image Frame */}
               <div className="relative overflow-hidden rounded-3xl border border-stone-200/50 bg-white p-3.5 shadow-2xl">
                 <img 
                   src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80" 
-                  alt="Community Sustainability and Empowerment" 
-                  className="h-80 w-full rounded-2xl object-cover shadow-inner filter sepia-[0.15] brightness-95"
+                  alt="LANI Foundation Community Impact" 
+                  className="h-[380px] lg:h-[460px] w-full rounded-2xl object-cover shadow-inner filter sepia-[0.15] brightness-95"
                 />
                 
                 {/* Embedded Stats Banner */}
                 <div className="absolute bottom-8 left-8 right-8 rounded-xl border border-white/20 bg-white/80 backdrop-blur-md p-4 shadow-lg text-left flex items-center justify-between">
                   <div>
-                    <span className="block text-[10px] font-bold uppercase tracking-wider text-stone-500">AUB Prize Funding</span>
-                    <strong className="text-lg font-bold text-lani-navy">₦5,000,000+ Yearly</strong>
+                    <span className="block text-[10px] font-bold uppercase tracking-wider text-stone-500">Focus Areas</span>
+                    <strong className="text-sm font-bold text-lani-navy">8 Connected Domains</strong>
                   </div>
                   <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-lani-primary text-white">
                     <Award className="h-5 w-5" />
@@ -247,111 +364,94 @@ export default function Home() {
             <ImpactCounter 
               target={15000} 
               suffix="+" 
-              label="Students Impacted" 
-              icon={<GraduationCap className="h-5 w-5" />} 
+              label="People Supported" 
+              icon={<Users className="h-5 w-5" />} 
             />
             <ImpactCounter 
-              target={250} 
+              target={10} 
               suffix="+" 
-              label="Business Grants Given" 
+              label="Delivered Interventions" 
               icon={<Briefcase className="h-5 w-5" />} 
             />
             <ImpactCounter 
-              target={45} 
+              target={50} 
               suffix="+" 
-              label="Communities Reached" 
+              label="Partner Care Homes & Orgs" 
               icon={<Building2 className="h-5 w-5" />} 
             />
             <ImpactCounter 
-              target={12} 
+              target={14} 
               suffix="" 
-              label="Annual Impact Projects" 
+              label="Years of Philanthropy" 
               icon={<Globe2 className="h-5 w-5" />} 
             />
           </div>
         </div>
       </section>
 
-      {/* 3. FOCUS AREAS */}
-      <section ref={focusRef} className="section text-center">
-        <span className="eyebrow">Our Focus Areas</span>
+      {/* NEW: WHO WE ARE SECTION */}
+      <section ref={whoWeAreRef} className="py-20 bg-white border-b border-stone-100 text-left">
+        <div className="mx-auto max-w-4xl px-6 sm:px-8">
+          <div className="flex flex-col gap-6 text-center md:text-left">
+            <span className="eyebrow mx-auto md:mx-0">Who We Are</span>
+            <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-lani-navy tracking-tight">
+              The Social Impact Arm of LANI Group
+            </h2>
+            <div className="h-1 w-20 bg-lani-primary rounded-full mx-auto md:mx-0 -mt-2 mb-4" />
+            
+            <p className="font-sans text-stone-700 text-base sm:text-lg leading-relaxed font-medium">
+              LANI Foundation is a philanthropic, non-governmental, and social impact organisation committed to improving the wellbeing, dignity, protection, and opportunities of vulnerable and underserved populations.
+            </p>
+            <p className="font-sans text-stone-600 text-sm sm:text-base leading-relaxed">
+              We work with women, children, orphaned and vulnerable children, persons with disabilities, refugees, asylum seekers, returned migrants, widows, youth, caregivers, grassroots educators, community-based organisations, and underserved households. Our work moves beyond occasional charity by creating structured, evidence-informed interventions that respond to real needs and strengthen the systems that serve people.
+            </p>
+            <p className="font-sans text-stone-600 text-sm sm:text-base leading-relaxed">
+              Through education, livelihood support, advocacy, capacity building, child protection, reintegration support, community wellbeing, and institutional strengthening, we help people and organisations build resilience, agency, and pathways toward sustainable growth.
+            </p>
+            
+            <div className="pt-4 flex justify-center md:justify-start">
+              <Link to="/about" className="inline-flex items-center gap-2 text-sm font-bold text-lani-primary hover:text-lani-navy transition-colors group">
+                Read our full story
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. OUR MISSION IN ACTION */}
+      <section ref={missionRef} className="section text-center bg-stone-50/50">
+        <span className="eyebrow">Our Mission in Action</span>
         <h2 className="mx-auto max-w-2xl font-heading text-3xl sm:text-4xl font-extrabold text-lani-navy tracking-tight mt-3">
-          Strategic Channels of Community Empowerment
+          Structured Action for Community Transformation
         </h2>
         <p className="mx-auto max-w-xl mt-4 text-stone-600 text-sm sm:text-base leading-relaxed">
-          Through advocacy, direct grants, and structural aid, we tackle societal barriers to enable growth and long-term climate resilience.
+          Through evidence-informed planning and direct service delivery, we run programmes designed to create measurable, sustainable social value.
         </p>
 
         <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {focusAreas.map((area, idx) => (
+          {missionAreas.map((area, idx) => (
             <div key={idx} className={`premium-card text-left ${area.color} flex flex-col justify-between`}>
               <div>
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#9B5B2E]/10 text-lani-primary mb-6">
                   {area.icon}
                 </div>
-                <h3 className="font-heading text-xl font-bold text-lani-navy tracking-tight mb-3">
+                <h3 className="font-heading text-lg font-bold text-lani-navy tracking-tight mb-3">
                   {area.title}
                 </h3>
-                <p className="text-stone-600 text-sm leading-relaxed mb-6">
+                <p className="text-stone-600 text-xs sm:text-sm leading-relaxed mb-6">
                   {area.desc}
                 </p>
               </div>
               <Link 
-                to={`/initiatives?focus=${area.title.split(' ')[0].toLowerCase()}`} 
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-lani-primary hover:text-lani-navy transition-colors group"
+                to="/initiatives" 
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-lani-primary hover:text-lani-navy transition-colors group mt-auto"
               >
-                Learn more
+                Explore programmes
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* 4. AUB PRIZE SPOTLIGHT */}
-      <section className="bg-lani-navy text-white relative overflow-hidden py-20 lg:py-24">
-        {/* Glow decoration */}
-        <div className="absolute top-1/2 left-1/4 -translate-y-1/2 -z-10 h-96 w-96 rounded-full bg-lani-primary/20 blur-[100px]" />
-        
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12 grid gap-12 lg:grid-cols-12 items-center text-left">
-          <div className="lg:col-span-8 flex flex-col gap-6">
-            <span className="inline-flex items-center rounded-full px-4 py-1 text-xs font-bold uppercase tracking-widest text-[#d69f7e] ring-1 ring-[#d69f7e]/30 bg-[#d69f7e]/10 w-fit">
-              Featured Program
-            </span>
-            
-            <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
-              The Angeline Uyi Bassey (AUB) Prize
-            </h2>
-            
-            <p className="text-stone-300 text-sm sm:text-base leading-relaxed max-w-3xl">
-              Honoring the legacy of the late Angeline Uyi Bassey, this annual award supports outstanding undergraduate and graduate researchers in Taxation, Law, and Extractive Industries. We fund research that generates local policy solutions for economic growth in Africa.
-            </p>
-
-            <div className="flex gap-4 pt-2">
-              <Link to="/initiatives" className="btn-primary bg-gradient-to-r from-lani-primary to-lani-gold hover:from-lani-gold hover:to-lani-primary text-white border-0 shadow-lg">
-                View Prize Guidelines
-              </Link>
-              <Link to="/get-involved" className="btn-secondary border-white/20 bg-transparent text-white hover:bg-white/10 hover:border-white/40">
-                Partner as Sponsor
-              </Link>
-            </div>
-          </div>
-
-          <div className="lg:col-span-4 flex justify-center">
-            <div className="relative rounded-2xl border border-white/15 bg-white/5 p-8 shadow-2xl backdrop-blur-sm max-w-xs text-center flex flex-col items-center">
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-lani-primary/20 text-lani-primary ring-4 ring-lani-primary/10 mb-6">
-                <Award className="h-8 w-8 text-[#d69f7e]" />
-              </div>
-              <h3 className="font-heading text-lg font-bold text-white mb-2">Research Grants</h3>
-              <p className="text-stone-400 text-xs leading-relaxed mb-6">
-                Direct funding, professional mentorship, and publishing assistance for award winners.
-              </p>
-              <div className="w-full pt-4 border-t border-white/10 flex justify-between text-xs font-bold">
-                <span className="text-stone-400">Status</span>
-                <span className="text-lani-emerald">Open for Proposals</span>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -371,73 +471,104 @@ export default function Home() {
           <div className="absolute left-1/2 top-0 h-full w-1 -translate-x-1/2 bg-stone-200 rounded-full overflow-hidden">
             <div 
               ref={timelineLineRef}
-              className="w-full h-full timeline-line origin-top"
+              className="w-full h-full timeline-line origin-top bg-lani-primary"
               style={{ transform: 'scaleY(0)' }}
             />
           </div>
 
           <div className="flex flex-col gap-16 relative">
-            
-            {/* Milestone 1: 2021 */}
-            <div className="timeline-item item-left flex flex-col md:flex-row items-center md:justify-start">
-              <div className="w-full md:w-1/2 md:pr-12 md:text-right text-center">
-                <div className="inline-block bg-white border border-stone-100 p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow relative max-w-md">
-                  <span className="font-heading text-2xl font-black text-lani-primary">2021</span>
-                  <h3 className="font-heading text-lg font-bold text-lani-navy mt-1">Foundation Inception</h3>
-                  <p className="text-stone-600 text-xs sm:text-sm leading-relaxed mt-2">
-                    Lani Foundation is officially registered as the social responsibility arm of LANI Group, setting core values in education, health, and advocacy.
-                  </p>
+            {historicMilestones.map((milestone, idx) => {
+              const isLeft = idx % 2 === 0;
+              return (
+                <div 
+                  key={idx} 
+                  className={`timeline-item ${isLeft ? 'item-left' : 'item-right'} flex flex-col md:flex-row items-center ${isLeft ? 'md:justify-start' : 'md:justify-end'}`}
+                >
+                  {isLeft ? null : <div className="hidden md:block w-1/2" />}
+                  <div className={`absolute left-1/2 -translate-x-1/2 h-6 w-6 rounded-full border-4 border-white ${milestone.color} shadow-md z-10`} />
+                  <div className={`w-full md:w-1/2 ${isLeft ? 'md:pr-12 md:text-right' : 'md:pl-12 md:text-left'} text-center`}>
+                    <div className="inline-block bg-white border border-stone-100 p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow relative max-w-md text-left">
+                      <span className="font-heading text-xl font-black text-lani-primary">{milestone.period}</span>
+                      <h3 className="font-heading text-base font-bold text-lani-navy mt-1">{milestone.title}</h3>
+                      <p className="text-stone-600 text-xs sm:text-sm leading-relaxed mt-2">
+                        {milestone.desc}
+                      </p>
+                    </div>
+                  </div>
+                  {isLeft ? <div className="hidden md:block w-1/2" /> : null}
                 </div>
-              </div>
-              <div className="absolute left-1/2 -translate-x-1/2 h-6 w-6 rounded-full border-4 border-white bg-lani-primary shadow-md z-10" />
-              <div className="hidden md:block w-1/2" />
-            </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
-            {/* Milestone 2: 2022 */}
-            <div className="timeline-item item-right flex flex-col md:flex-row items-center md:justify-end">
-              <div className="hidden md:block w-1/2" />
-              <div className="absolute left-1/2 -translate-x-1/2 h-6 w-6 rounded-full border-4 border-white bg-lani-green shadow-md z-10" />
-              <div className="w-full md:w-1/2 md:pl-12 md:text-left text-center">
-                <div className="inline-block bg-white border border-stone-100 p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow relative max-w-md">
-                  <span className="font-heading text-2xl font-black text-lani-green">2022</span>
-                  <h3 className="font-heading text-lg font-bold text-lani-navy mt-1">AUB Prize Inauguration</h3>
-                  <p className="text-stone-600 text-xs sm:text-sm leading-relaxed mt-2">
-                    Successfully launched the Angeline Uyi Bassey (AUB) Prize, awarding research grants to students in taxation and extractive policy.
-                  </p>
+      {/* 5.5 LATEST ARTICLES SECTION */}
+      <section ref={articlesRef} className="section bg-stone-50/40 border-t border-b border-stone-100 text-left">
+        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+            <div>
+              <span className="eyebrow">Insights & Impact</span>
+              <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-lani-navy tracking-tight mt-3">
+                Latest Research & Stories
+              </h2>
+              <p className="text-stone-600 text-sm max-w-xl mt-2">
+                Read about our recent programmatic findings, capacity strengthening milestones, and stories from the field.
+              </p>
+            </div>
+            <Link 
+              to="/articles" 
+              className="inline-flex items-center gap-2 text-sm font-bold text-lani-primary hover:text-lani-primary/80 transition-colors group shrink-0"
+            >
+              View All Articles
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-3">
+            {featuredArticles.map((art) => (
+              <article 
+                key={art.id} 
+                className="article-card bg-white rounded-3xl border border-stone-150 overflow-hidden shadow-sm hover:shadow-premium hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+              >
+                <div>
+                  <div className="relative h-44 overflow-hidden bg-stone-100">
+                    <img 
+                      src={art.image} 
+                      alt={art.title} 
+                      className="w-full h-full object-cover"
+                    />
+                    <span className="absolute top-3 left-3 bg-white/90 backdrop-blur border border-stone-200/40 text-lani-navy text-[9px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full shadow-sm">
+                      {art.category}
+                    </span>
+                  </div>
+
+                  <div className="p-6">
+                     <div className="flex items-center gap-3 text-stone-400 text-[11px] mb-2.5">
+                       <span>{art.date}</span>
+                       <span>•</span>
+                       <span>{art.readTime}</span>
+                     </div>
+                     <h3 className="font-heading text-base font-bold text-lani-navy leading-snug mb-2 hover:text-lani-primary transition-colors">
+                       <Link to={`/articles`}>{art.title}</Link>
+                     </h3>
+                     <p className="text-stone-500 text-xs leading-relaxed line-clamp-3">
+                       {art.excerpt}
+                     </p>
+                  </div>
                 </div>
-              </div>
-            </div>
 
-            {/* Milestone 3: 2023 */}
-            <div className="timeline-item item-left flex flex-col md:flex-row items-center md:justify-start">
-              <div className="w-full md:w-1/2 md:pr-12 md:text-right text-center">
-                <div className="inline-block bg-white border border-stone-100 p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow relative max-w-md">
-                  <span className="font-heading text-2xl font-black text-lani-emerald">2023</span>
-                  <h3 className="font-heading text-lg font-bold text-lani-navy mt-1">Climate Sustainability Advocacy</h3>
-                  <p className="text-stone-600 text-xs sm:text-sm leading-relaxed mt-2">
-                    Kicked off our Reforestation and Solar Skills project in coastal communities, training 300+ youths in eco-friendly technical roles.
-                  </p>
+                <div className="p-6 pt-0 border-t border-stone-100 mt-2">
+                  <Link 
+                    to={`/articles`} 
+                    className="text-xs font-bold text-lani-primary hover:underline flex items-center gap-1"
+                  >
+                    Read Article
+                    <ArrowRight className="h-3 w-3" />
+                  </Link>
                 </div>
-              </div>
-              <div className="absolute left-1/2 -translate-x-1/2 h-6 w-6 rounded-full border-4 border-white bg-lani-emerald shadow-md z-10" />
-              <div className="hidden md:block w-1/2" />
-            </div>
-
-            {/* Milestone 4: 2025 */}
-            <div className="timeline-item item-right flex flex-col md:flex-row items-center md:justify-end">
-              <div className="hidden md:block w-1/2" />
-              <div className="absolute left-1/2 -translate-x-1/2 h-6 w-6 rounded-full border-4 border-white bg-lani-gold shadow-md z-10" />
-              <div className="w-full md:w-1/2 md:pl-12 md:text-left text-center">
-                <div className="inline-block bg-white border border-stone-100 p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow relative max-w-md">
-                  <span className="font-heading text-2xl font-black text-lani-gold">2025</span>
-                  <h3 className="font-heading text-lg font-bold text-lani-navy mt-1">Nationwide Expansion</h3>
-                  <p className="text-stone-600 text-xs sm:text-sm leading-relaxed mt-2">
-                    Expanded micro-grants to smallholder farmers and small business founders, covering 6 geo-political zones in Nigeria.
-                  </p>
-                </div>
-              </div>
-            </div>
-
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -445,7 +576,6 @@ export default function Home() {
       {/* 6. CALL TO ACTION */}
       <section ref={ctaRef} className="mx-auto max-w-7xl px-6 pb-24 sm:px-8 lg:px-12 text-center">
         <div className="bg-gradient-to-br from-lani-navy to-stone-900 rounded-3xl p-12 lg:p-16 relative overflow-hidden shadow-2xl border border-stone-800 text-white flex flex-col items-center">
-          {/* Decorative gradients */}
           <div className="absolute -top-12 -right-12 h-44 w-44 rounded-full bg-lani-primary/20 blur-2xl" />
           <div className="absolute -bottom-12 -left-12 h-44 w-44 rounded-full bg-lani-green/20 blur-2xl" />
 
@@ -455,13 +585,13 @@ export default function Home() {
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight max-w-2xl">
             Be a Catalyst for Social Transformation
           </h2>
-          <p className="mt-4 text-stone-300 text-sm sm:text-base leading-relaxed max-w-xl">
-            Whether you volunteer, sponsor a research paper for the AUB Prize, or fund a community solar grid, your partnership drives sustainable development.
+          <p className="mt-4 text-stone-300 text-sm sm:text-base leading-relaxed max-w-2xl">
+            Partner with LANI Foundation to support children, women, youth, returned migrants, vulnerable households, caregivers, educators, and community structures. Your support can help turn compassion into practical action and practical action into long-term transformation.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4 justify-center">
-            <Link to="/get-involved" className="btn-primary bg-gradient-to-r from-lani-primary to-lani-green border-0">
-              Support Our Projects
+            <Link to="/get-involved" className="btn-primary">
+              Partner With Us
             </Link>
             <Link to="/contact" className="btn-secondary border-white/10 bg-white/5 text-white hover:bg-white/10">
               Contact Our Team

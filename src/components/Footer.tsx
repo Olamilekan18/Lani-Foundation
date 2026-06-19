@@ -77,7 +77,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="h-4 w-4 text-lani-primary shrink-0" />
-                <span>+234 807 577 4911</span>
+                <span>+234 817 911 9814</span>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="h-4 w-4 text-lani-primary shrink-0" />
@@ -100,13 +100,13 @@ export default function Footer() {
                   <Link to="/initiatives" className="hover:text-white transition-colors">Our Initiatives</Link>
                 </li>
                 <li>
+                  <Link to="/articles" className="hover:text-white transition-colors">Read Articles & News</Link>
+                </li>
+                <li>
                   <Link to="/about#leadership" className="hover:text-white transition-colors">Leadership Team</Link>
                 </li>
                 <li>
                   <Link to="/get-involved" className="hover:text-white transition-colors">Volunteer Opportunities</Link>
-                </li>
-                <li>
-                  <Link to="/contact" className="hover:text-white transition-colors">Office Location</Link>
                 </li>
               </ul>
             </div>
@@ -117,16 +117,16 @@ export default function Footer() {
               </h4>
               <ul className="mt-4 flex flex-col gap-2.5 text-sm">
                 <li>
-                  <Link to="/initiatives?focus=education" className="hover:text-white transition-colors">AUB Prize & Education</Link>
+                  <Link to="/initiatives?focus=child-protection" className="hover:text-white transition-colors">Child Protection</Link>
                 </li>
                 <li>
-                  <Link to="/initiatives?focus=entrepreneurship" className="hover:text-white transition-colors">Entrepreneurship Support</Link>
+                  <Link to="/initiatives?focus=social-inclusion" className="hover:text-white transition-colors">Social Inclusion</Link>
                 </li>
                 <li>
-                  <Link to="/initiatives?focus=sustainability" className="hover:text-white transition-colors">Climate & Sustainability</Link>
+                  <Link to="/initiatives?focus=education" className="hover:text-white transition-colors">Education & Literacy</Link>
                 </li>
                 <li>
-                  <Link to="/initiatives?focus=advocacy" className="hover:text-white transition-colors">Health & Social Advocacy</Link>
+                  <Link to="/initiatives?focus=systems-capacity" className="hover:text-white transition-colors">Systems & Capacity</Link>
                 </li>
               </ul>
             </div>

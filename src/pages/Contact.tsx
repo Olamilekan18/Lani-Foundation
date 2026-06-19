@@ -1,5 +1,5 @@
-import { useState, useRef } from 'react';
-import { Mail, Phone, MapPin, Clock, Send, CheckCircle, Plus, Minus, Map } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import { Mail, Phone, MapPin, Clock, Send, CheckCircle, Plus, Minus } from 'lucide-react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
@@ -14,6 +14,11 @@ export default function Contact() {
   const containerRef = useRef<HTMLDivElement>(null);
   const infoRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
+
+  // Set document title for SEO
+  useEffect(() => {
+    document.title = "Contact LANI Foundation | Enquiries & Partnerships";
+  }, []);
 
   // Entrance animations
   useGSAP(() => {
@@ -51,7 +56,7 @@ export default function Contact() {
             Let's Start a Conversation
           </h1>
           <p className="text-stone-600 text-sm sm:text-base leading-relaxed max-w-2xl mt-4">
-            Have questions about the AUB Prize eligibility, need details about our agricultural grants, or want to explore sponsorships? Send us a message or visit our Ikeja, Lagos office.
+            Have questions about our initiatives, partnership programs, or want to explore sponsorships? Send us a message or visit our Ikeja, Lagos office.
           </p>
         </div>
       </section>
@@ -113,34 +118,26 @@ export default function Contact() {
               </div>
             </div>
           </div>
-
-          {/* Premium Map Widget Mockup (Visually Wowing) */}
-          <div className="relative overflow-hidden rounded-3xl border border-stone-200 bg-stone-100 shadow-sm h-64 flex flex-col justify-between p-4">
-            {/* Map Grid Background pattern using inline CSS */}
-            <div 
-              className="absolute inset-0 z-0 bg-white opacity-40" 
-              style={{
-                backgroundImage: 'radial-gradient(circle, #e2dcd0 1px, transparent 1px)',
-                backgroundSize: '20px 20px',
-              }}
+          {/* Actual Google Maps Interactive Widget */}
+          <div className="relative overflow-hidden rounded-3xl border border-stone-200 bg-stone-100 shadow-sm h-64 flex flex-col justify-between">
+            <iframe
+              title="LANI Foundation Headquarters Map"
+              src={`https://maps.google.com/maps?q=53B%20Adekunle%20Fajuyi%20Way,%20Ikeja%20G.R.A.,%20Lagos,%20Nigeria&t=&z=${mapZoom}&ie=UTF8&iwloc=&output=embed`}
+              className="absolute inset-0 w-full h-full border-0"
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
             />
-            {/* Abstract Roads Mockup */}
-            <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
-              <div className="h-0.5 w-full bg-stone-300 absolute top-1/3 transform -rotate-12 border-b border-white" />
-              <div className="h-0.5 w-full bg-stone-300 absolute top-2/3 transform rotate-6 border-b border-white" />
-              <div className="w-0.5 h-full bg-stone-300 absolute left-1/3 transform rotate-45 border-r border-white" />
-              <div className="w-0.5 h-full bg-stone-300 absolute left-2/3 transform -rotate-45 border-r border-white" />
-            </div>
-
-            {/* Map Header details */}
-            <div className="relative z-10 flex justify-between items-start">
-              <div className="rounded-lg border border-stone-200/50 bg-white/90 backdrop-blur p-2.5 shadow-sm text-left max-w-[200px]">
+            
+            {/* Map Header overlays */}
+            <div className="relative z-10 flex justify-between items-start p-4 pointer-events-none">
+              <div className="rounded-lg border border-stone-200/50 bg-white/90 backdrop-blur p-2.5 shadow-sm text-left max-w-[200px] pointer-events-auto">
                 <strong className="block text-[10px] font-bold text-lani-navy leading-none">Ikeja G.R.A.</strong>
                 <span className="text-[8px] text-stone-500 font-semibold uppercase tracking-wider mt-0.5 block">Lagos, Nigeria</span>
               </div>
               
               {/* Map controls */}
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-1 pointer-events-auto">
                 <button 
                   onClick={() => setMapZoom(Math.min(18, mapZoom + 1))}
                   className="h-8 w-8 rounded-lg bg-white border border-stone-200 shadow-sm flex items-center justify-center text-stone-600 hover:bg-stone-50"
@@ -158,23 +155,11 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Map center marker */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="relative flex flex-col items-center">
-                {/* Pin shape */}
-                <div className="h-8 w-8 rounded-full bg-lani-primary border-4 border-white flex items-center justify-center text-white shadow-lg animate-bounce">
-                  <Map className="h-3.5 w-3.5" />
-                </div>
-                {/* Pulse ring */}
-                <div className="absolute top-6 h-2 w-6 rounded-full bg-black/10 blur-[2px]" />
-              </div>
-            </div>
-
             {/* Map Footer status */}
-            <div className="relative z-10 flex justify-between items-center bg-white/90 backdrop-blur border border-stone-200/40 rounded-xl p-2 px-3 text-[10px] shadow-sm">
-              <span className="text-stone-500 font-medium">Zoom Level: {mapZoom}00m</span>
+            <div className="relative z-10 flex justify-between items-center bg-white/90 backdrop-blur border border-stone-200/40 rounded-xl p-2 px-3 text-[10px] shadow-sm m-4">
+              <span className="text-stone-500 font-medium">Zoom Level: {mapZoom}</span>
               <a 
-                href="https://maps.google.com" 
+                href="https://maps.google.com/?q=53B%20Adekunle%20Fajuyi%20Way,%20Ikeja%20G.R.A.,%20Lagos,%20Nigeria" 
                 target="_blank" 
                 rel="noreferrer" 
                 className="font-bold text-lani-primary hover:underline uppercase tracking-wider text-[8px]"
@@ -239,7 +224,7 @@ export default function Contact() {
                 required
                 value={formData.subject}
                 onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                placeholder="e.g. AUB Prize Sponsorship or Inquiry"
+                placeholder="e.g. Partnership Opportunity or General Inquiry"
               />
             </div>
 

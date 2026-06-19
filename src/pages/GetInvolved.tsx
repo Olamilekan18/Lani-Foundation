@@ -1,20 +1,47 @@
-import { useState, useRef } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { Heart, Handshake, Award, CheckCircle, X, ShieldAlert, Sparkles, Upload, Loader2 } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import { 
+  Heart, 
+  Handshake, 
+  CheckCircle, 
+  X, 
+  Sparkles, 
+  Loader2,
+  BookOpen,
+  ShieldCheck,
+  Briefcase,
+  Users,
+  Droplet,
+  Leaf,
+  Building2,
+  ArrowRight
+} from 'lucide-react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
 gsap.registerPlugin(useGSAP);
 
+interface Campaign {
+  title: string;
+  target: string;
+  desc: string;
+  icon: React.ReactNode;
+  color: string;
+}
+
 export default function GetInvolved() {
-  const [searchParams] = useSearchParams();
-  const initialForm = searchParams.get('apply') === 'aub-prize' ? 'aub-prize' : 'partner';
+  const initialForm = 'partner';
   const [activeForm, setActiveForm] = useState(initialForm);
   const [submitting, setSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
   const modalRef = useRef<HTMLDivElement>(null);
   const modalContentRef = useRef<HTMLDivElement>(null);
+  const campaignsRef = useRef<HTMLDivElement>(null);
+
+  // Set document title for SEO
+  useEffect(() => {
+    document.title = "Partner With Us | LANI Foundation";
+  }, []);
 
   // Form states
   const [partnerForm, setPartnerForm] = useState({
@@ -23,10 +50,6 @@ export default function GetInvolved() {
   
   const [volunteerForm, setVolunteerForm] = useState({
     name: '', email: '', phone: '', skills: 'logistics', availability: 'weekends', message: ''
-  });
-
-  const [aubForm, setAubForm] = useState({
-    name: '', email: '', phone: '', university: '', course: '', level: 'undergraduate', topic: '', cvFile: '', proposalFile: ''
   });
 
   // Modal animations
@@ -51,6 +74,78 @@ export default function GetInvolved() {
     }
   }, { dependencies: [showSuccess], scope: modalRef });
 
+  // Scroll triggers for campaigns cards
+  useGSAP(() => {
+    if (!campaignsRef.current) return;
+    gsap.fromTo(
+      campaignsRef.current.children,
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.08,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: campaignsRef.current,
+          start: 'top 85%',
+        },
+      }
+    );
+  }, { scope: campaignsRef });
+
+  const campaigns: Campaign[] = [
+    {
+      title: 'Sponsor a Student Learning Kit',
+      target: '₦25,000 per kit',
+      desc: 'Provide textbooks, notebooks, writing materials, and a school bag for an underserved child in a care setting or public school.',
+      icon: <BookOpen className="h-5 w-5" />,
+      color: 'bg-lani-primary/10 text-lani-primary',
+    },
+    {
+      title: 'Support a Care-Home Safety Kit',
+      target: '₦150,000 per home',
+      desc: "Equip a children's home with emergency first-aid boxes, fire extinguishers, safety mapping, and basic caregiver training.",
+      icon: <ShieldCheck className="h-5 w-5" />,
+      color: 'bg-lani-green/10 text-lani-green',
+    },
+    {
+      title: 'Empower a Returned Migrant or Vulnerable Youth',
+      target: '₦250,000 per setup',
+      desc: 'Support the setup of micro-enterprises, carpentry workshops, tailoring units, or agricultural grants for vocational graduates.',
+      icon: <Briefcase className="h-5 w-5" />,
+      color: 'bg-lani-emerald/10 text-lani-emerald',
+    },
+    {
+      title: 'Support Women and Widows’ Livelihood Pathways',
+      target: '₦100,000 per grant',
+      desc: 'Provide micro-grants, training, and start-up kits to widows and underserved women to launch self-sustaining trade businesses.',
+      icon: <Users className="h-5 w-5" />,
+      color: 'bg-lani-blue/10 text-lani-blue',
+    },
+    {
+      title: 'Community Health, WASH and Wellbeing Outreach',
+      target: '₦500,000 per community',
+      desc: 'Fund sanitation equipment, clean water advocacy, community hygiene kits, and health screening sessions in underserved areas.',
+      icon: <Droplet className="h-5 w-5" />,
+      color: 'bg-lani-gold/10 text-lani-gold',
+    },
+    {
+      title: 'Support Climate-Smart Livelihoods',
+      target: '₦300,000 per pilot',
+      desc: 'Finance solar training workshops, seed distribution for climate-resilient farming, and local reforestation initiatives.',
+      icon: <Leaf className="h-5 w-5" />,
+      color: 'bg-stone-500/10 text-stone-600',
+    },
+    {
+      title: 'Strengthen Community-Based Organisations',
+      target: '₦200,000 per cycle',
+      desc: 'Help local groups adopt audit-ready systems, process documentation, templates, and data trackers to improve service delivery.',
+      icon: <Building2 className="h-5 w-5" />,
+      color: 'bg-[#9B5B2E]/10 text-lani-primary',
+    },
+  ];
+
   const handlePartnerSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
@@ -71,14 +166,19 @@ export default function GetInvolved() {
     }, 1500);
   };
 
-  const handleAubSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
-      setShowSuccess(true);
-      setAubForm({ name: '', email: '', phone: '', university: '', course: '', level: 'undergraduate', topic: '', cvFile: '', proposalFile: '' });
-    }, 1800);
+
+
+  const selectCampaignForPartnership = (campaignTitle: string) => {
+    setActiveForm('partner');
+    setPartnerForm(prev => ({
+      ...prev,
+      message: `We are interested in partnering to support the campaign: "${campaignTitle}". Please send us details.`
+    }));
+    // Scroll to form smoothly
+    const formElement = document.getElementById('involvement-forms');
+    if (formElement) {
+      formElement.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -97,8 +197,49 @@ export default function GetInvolved() {
         </div>
       </section>
 
-      {/* 2. FORM INTERACTIVE WORKFLOW */}
-      <section className="section text-left grid gap-12 lg:grid-cols-12">
+      {/* 2. ACTIVE CAMPAIGNS SECTION */}
+      <section className="section text-left border-b border-stone-100 bg-white">
+        <span className="eyebrow">Active Support Campaigns</span>
+        <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-lani-navy tracking-tight mt-3 mb-2">
+          Fund a Targeted Community Programme
+        </h2>
+        <p className="text-stone-600 text-sm sm:text-base leading-relaxed max-w-2xl mb-12">
+          We organize direct, transparent support programs with clear unit target values. Select a program below to co-fund or sponsor.
+        </p>
+
+        <div ref={campaignsRef} className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {campaigns.map((camp, idx) => (
+            <div key={idx} className="p-6 rounded-2xl bg-stone-50 border border-stone-100 hover:border-lani-primary/25 hover:bg-white hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between gap-4 mb-5">
+                  <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${camp.color}`}>
+                    {camp.icon}
+                  </div>
+                  <span className="text-xs font-bold text-lani-navy bg-white px-3 py-1 rounded-full shadow-sm border border-stone-200/50">
+                    {camp.target}
+                  </span>
+                </div>
+                <h3 className="font-heading text-base font-bold text-lani-navy mb-2">
+                  {camp.title}
+                </h3>
+                <p className="text-stone-500 text-xs sm:text-sm leading-relaxed mb-6">
+                  {camp.desc}
+                </p>
+              </div>
+              <button
+                onClick={() => selectCampaignForPartnership(camp.title)}
+                className="w-full py-2.5 rounded-xl border border-stone-200 text-xs font-bold text-stone-600 hover:text-lani-primary hover:border-lani-primary/50 transition-colors flex items-center justify-center gap-1.5"
+              >
+                Partner on this Campaign
+                <ArrowRight className="h-3 w-3" />
+              </button>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 3. FORM INTERACTIVE WORKFLOW */}
+      <section id="involvement-forms" className="section text-left grid gap-12 lg:grid-cols-12 scroll-mt-20 bg-stone-50/30">
         {/* Left tabs selector panel */}
         <div className="lg:col-span-4 flex flex-col gap-4">
           <button
@@ -143,26 +284,6 @@ export default function GetInvolved() {
             </div>
           </button>
 
-          <button
-            onClick={() => setActiveForm('aub-prize')}
-            className={`w-full text-left p-6 rounded-2xl border transition-all duration-300 flex gap-4 ${
-              activeForm === 'aub-prize'
-                ? 'bg-white border-lani-primary shadow-premium'
-                : 'bg-stone-50 hover:bg-stone-100/50 border-stone-100'
-            }`}
-          >
-            <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${
-              activeForm === 'aub-prize' ? 'bg-lani-primary text-white' : 'bg-stone-200 text-stone-500'
-            }`}>
-              <Award className="h-5 w-5" />
-            </div>
-            <div>
-              <h3 className="font-heading text-base font-bold text-lani-navy">AUB Prize Application</h3>
-              <p className="text-stone-500 text-xs mt-1 leading-normal">
-                Submit research proposals on taxation, laws, and extractive industries.
-              </p>
-            </div>
-          </button>
         </div>
 
         {/* Right Form container */}
@@ -241,10 +362,11 @@ export default function GetInvolved() {
                       value={partnerForm.project}
                       onChange={(e) => setPartnerForm({ ...partnerForm, project: e.target.value })}
                     >
-                      <option value="education">AUB Prize & Education</option>
-                      <option value="agriculture">Agro-Grants (Agriculture)</option>
-                      <option value="solar">Youth Solar Technical Hubs</option>
-                      <option value="health">Maternal Clinical Aid</option>
+                      <option value="child-protection">Child Protection & Welfare</option>
+                      <option value="social-inclusion">Gender Equality & Social Inclusion</option>
+                      <option value="education">Education & Literacy</option>
+                      <option value="systems-capacity">Systems & Capacity Strengthening</option>
+                      <option value="migration-livelihoods">Migration & Refugee Livelihoods</option>
                     </select>
                   </div>
                 </div>
@@ -383,167 +505,13 @@ export default function GetInvolved() {
               </form>
             )}
 
-            {/* AUB PRIZE APPLICATION FORM */}
-            {activeForm === 'aub-prize' && (
-              <form onSubmit={handleAubSubmit} className="flex flex-col gap-6">
-                <div className="border-b border-stone-100 pb-4">
-                  <h2 className="font-heading text-2xl font-bold text-lani-navy">AUB Prize Research Submission</h2>
-                  <p className="text-stone-500 text-xs sm:text-sm mt-1">Submit your academic research proposal for the Angeline Uyi Bassey Prize.</p>
-                </div>
 
-                <div className="grid gap-6 sm:grid-cols-2">
-                  <div className="form-field">
-                    <span>Applicant Full Name *</span>
-                    <input
-                      type="text"
-                      required
-                      value={aubForm.name}
-                      onChange={(e) => setAubForm({ ...aubForm, name: e.target.value })}
-                      placeholder="e.g. Philip Musah"
-                    />
-                  </div>
-
-                  <div className="form-field">
-                    <span>Active Email *</span>
-                    <input
-                      type="email"
-                      required
-                      value={aubForm.email}
-                      onChange={(e) => setAubForm({ ...aubForm, email: e.target.value })}
-                      placeholder="philip@uni.edu"
-                    />
-                  </div>
-
-                  <div className="form-field">
-                    <span>Phone Number *</span>
-                    <input
-                      type="tel"
-                      required
-                      value={aubForm.phone}
-                      onChange={(e) => setAubForm({ ...aubForm, phone: e.target.value })}
-                      placeholder="+234..."
-                    />
-                  </div>
-
-                  <div className="form-field">
-                    <span>University Name *</span>
-                    <input
-                      type="text"
-                      required
-                      value={aubForm.university}
-                      onChange={(e) => setAubForm({ ...aubForm, university: e.target.value })}
-                      placeholder="e.g. University of Lagos"
-                    />
-                  </div>
-
-                  <div className="form-field">
-                    <span>Course & Department *</span>
-                    <input
-                      type="text"
-                      required
-                      value={aubForm.course}
-                      onChange={(e) => setAubForm({ ...aubForm, course: e.target.value })}
-                      placeholder="e.g. Economics / Commercial Law"
-                    />
-                  </div>
-
-                  <div className="form-field">
-                    <span>Academic Status Level *</span>
-                    <select
-                      value={aubForm.level}
-                      onChange={(e) => setAubForm({ ...aubForm, level: e.target.value })}
-                    >
-                      <option value="undergraduate">Undergraduate (Final Year)</option>
-                      <option value="masters">Master of Science (M.Sc / LL.M)</option>
-                      <option value="phd">Doctorate (Ph.D. Scholar)</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className="form-field">
-                  <span>Proposed Research Topic *</span>
-                  <input
-                    type="text"
-                    required
-                    value={aubForm.topic}
-                    onChange={(e) => setAubForm({ ...aubForm, topic: e.target.value })}
-                    placeholder="e.g. Evaluative Study of Extractive Taxation Models in Nigeria"
-                  />
-                </div>
-
-                {/* Mock Upload components */}
-                <div className="grid gap-6 sm:grid-cols-2">
-                  <div className="form-field">
-                    <span>Upload CV (PDF) *</span>
-                    <div className="flex items-center justify-between p-3 border border-stone-200 border-dashed rounded-lg bg-stone-50 cursor-pointer hover:bg-stone-100 transition-colors">
-                      <div className="flex items-center gap-2">
-                        <Upload className="h-4 w-4 text-stone-400" />
-                        <span className="text-xs text-stone-500 font-medium">
-                          {aubForm.cvFile ? 'cv_document.pdf' : 'Choose file...'}
-                        </span>
-                      </div>
-                      <button 
-                        type="button"
-                        onClick={() => setAubForm({ ...aubForm, cvFile: 'cv_document.pdf' })}
-                        className="text-[10px] font-bold text-lani-primary uppercase bg-white border border-stone-200 px-2 py-1 rounded"
-                      >
-                        Select
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className="form-field">
-                    <span>Upload Research Proposal (PDF) *</span>
-                    <div className="flex items-center justify-between p-3 border border-stone-200 border-dashed rounded-lg bg-stone-50 cursor-pointer hover:bg-stone-100 transition-colors">
-                      <div className="flex items-center gap-2">
-                        <Upload className="h-4 w-4 text-stone-400" />
-                        <span className="text-xs text-stone-500 font-medium">
-                          {aubForm.proposalFile ? 'proposal_draft.pdf' : 'Choose file...'}
-                        </span>
-                      </div>
-                      <button 
-                        type="button"
-                        onClick={() => setAubForm({ ...aubForm, proposalFile: 'proposal_draft.pdf' })}
-                        className="text-[10px] font-bold text-lani-primary uppercase bg-white border border-stone-200 px-2 py-1 rounded"
-                      >
-                        Select
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex gap-2.5 p-4 rounded-xl bg-amber-50 border border-amber-100 text-amber-800 text-xs leading-relaxed">
-                  <ShieldAlert className="h-5 w-5 shrink-0 text-amber-600 mt-0.5" />
-                  <span>
-                    <strong>Submission Declaration:</strong> By submitting, you confirm that this research proposal is your original work, is not plagiarized, and has been approved by your department research advisor.
-                  </span>
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="btn-primary w-fit px-8 py-3 mt-2 self-start flex items-center gap-2"
-                >
-                  {submitting ? (
-                    <>
-                      <Loader2 className="h-4 w-4 animate-spin" />
-                      Uploading Files...
-                    </>
-                  ) : (
-                    <>
-                      Submit Application
-                      <Award className="h-4 w-4" />
-                    </>
-                  )}
-                </button>
-              </form>
-            )}
 
           </div>
         </div>
       </section>
 
-      {/* 3. SUCCESS MODAL (GSAP ANIMATED DIALOG OVERLAY) */}
+      {/* 4. SUCCESS MODAL (GSAP ANIMATED DIALOG OVERLAY) */}
       <div 
         ref={modalRef}
         style={{ opacity: 0, pointerEvents: 'none' }}
