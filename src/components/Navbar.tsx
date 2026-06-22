@@ -63,7 +63,7 @@ export default function Navbar() {
     { name: 'Home', path: '/' },
     { name: 'About Us', path: '/about' },
     { name: 'Thematic Focus', path: '/thematic-focus' },
-    { name: 'Articles', path: '/articles' },
+    { name: 'Articles & Impact', path: '/articles' },
     { name: 'Partners', path: '/partners' },
     { name: 'Get Involved', path: '/get-involved' },
     { name: 'Contact', path: '/contact' },

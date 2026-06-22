@@ -15,7 +15,7 @@ export default function Articles() {
 
   // Set document title for SEO
   useEffect(() => {
-    document.title = "Articles & News | LANI Foundation";
+    document.title = "Articles & Impact | LANI Foundation";
   }, []);
 
   // Filter categories list
@@ -46,7 +46,7 @@ export default function Articles() {
             Insights & Impact
           </span>
           <h1 className="font-heading text-4xl sm:text-5xl font-black text-lani-navy tracking-tight mt-3">
-            Lani Articles & Research
+            Articles & Impact
           </h1>
           <p className="text-stone-600 text-sm sm:text-base leading-relaxed max-w-2xl mt-4">
             Explore stories of impact, policy briefs, NGO capacity research, and development studies from our thematic focus areas in local communities.
@@ -93,12 +93,12 @@ export default function Articles() {
             >
               <div>
                 {/* Image */}
-                <div className="relative h-48 overflow-hidden bg-stone-100">
-                  <Link to={`/articles/${art.id}`}>
+                <div className="relative h-48 overflow-hidden bg-stone-100 flex items-center justify-center">
+                  <Link to={`/articles/${art.id}`} className="w-full h-full flex items-center justify-center">
                     <img 
                       src={art.image} 
                       alt={art.title} 
-                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                      className="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-105"
                       loading="lazy"
                     />
                   </Link>

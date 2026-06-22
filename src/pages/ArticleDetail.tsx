@@ -7,6 +7,79 @@ import { articlesData } from '../data/articles';
 
 gsap.registerPlugin(useGSAP);
 
+function renderTextWithBold(text: string) {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+  return parts.map((part, index) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return <strong key={index} className="font-extrabold text-lani-navy">{part.slice(2, -2)}</strong>;
+    }
+    return part;
+  });
+}
+
+interface MarkdownBlock {
+  type: 'paragraph' | 'heading' | 'bullet-list' | 'numbered-list';
+  items: string[];
+}
+
+function parseMarkdown(content: string): MarkdownBlock[] {
+  const lines = content.split('\n');
+  const blocks: MarkdownBlock[] = [];
+  let currentBlock: MarkdownBlock | null = null;
+  
+  for (let line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed) {
+      if (currentBlock) {
+        blocks.push(currentBlock);
+        currentBlock = null;
+      }
+      continue;
+    }
+    
+    if (trimmed.startsWith('###')) {
+      if (currentBlock) {
+        blocks.push(currentBlock);
+      }
+      blocks.push({ type: 'heading', items: [trimmed.replace('###', '').trim()] });
+      currentBlock = null;
+    } else if (trimmed.startsWith('*')) {
+      if (currentBlock && currentBlock.type !== 'bullet-list') {
+        blocks.push(currentBlock);
+        currentBlock = null;
+      }
+      if (!currentBlock) {
+        currentBlock = { type: 'bullet-list', items: [] };
+      }
+      currentBlock.items.push(trimmed.replace(/^\*\s*/, ''));
+    } else if (/^\d+\.\s+/.test(trimmed)) {
+      if (currentBlock && currentBlock.type !== 'numbered-list') {
+        blocks.push(currentBlock);
+        currentBlock = null;
+      }
+      if (!currentBlock) {
+        currentBlock = { type: 'numbered-list', items: [] };
+      }
+      currentBlock.items.push(trimmed.replace(/^\d+\.\s+/, ''));
+    } else {
+      if (currentBlock && currentBlock.type !== 'paragraph') {
+        blocks.push(currentBlock);
+        currentBlock = null;
+      }
+      if (!currentBlock) {
+        currentBlock = { type: 'paragraph', items: [] };
+      }
+      currentBlock.items.push(trimmed);
+    }
+  }
+  
+  if (currentBlock) {
+    blocks.push(currentBlock);
+  }
+  
+  return blocks;
+}
+
 export default function ArticleDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -54,7 +127,7 @@ export default function ArticleDetail() {
           className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-lani-primary hover:text-lani-primary/80 transition-colors group"
         >
           <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-          Back to Articles
+          Back to Articles & Impact
         </Link>
       </div>
 
@@ -81,62 +154,102 @@ export default function ArticleDetail() {
       </h1>
 
       {/* Hero Image */}
-      <div className="w-full h-[250px] sm:h-[400px] overflow-hidden rounded-3xl bg-stone-150 mb-10 shadow-md">
+      <div className="w-full h-[250px] sm:h-[400px] overflow-hidden rounded-3xl bg-stone-100 mb-10 shadow-md">
         <img 
           src={article.image} 
           alt={article.title} 
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover object-top"
         />
       </div>
 
       {/* Content layout */}
       <div className="prose prose-stone max-w-none text-stone-700 text-sm sm:text-base leading-relaxed flex flex-col gap-6 pr-2">
-        {article.content.split('\n\n').map((paragraph, pIdx) => {
-          const trimmed = paragraph.trim();
-          if (!trimmed) return null;
-          
-          // Header markdown
-          if (trimmed.startsWith('###')) {
-            return (
-              <h2 key={pIdx} className="font-heading text-xl sm:text-2xl font-extrabold text-lani-navy mt-6 mb-2">
-                {trimmed.replace('###', '').trim()}
-              </h2>
-            );
+        {parseMarkdown(article.content).map((block, idx) => {
+          switch (block.type) {
+            case 'heading':
+              return (
+                <h2 key={idx} className="font-heading text-xl sm:text-2xl font-extrabold text-lani-navy mt-6 mb-2">
+                  {renderTextWithBold(block.items[0])}
+                </h2>
+              );
+            case 'bullet-list':
+              return (
+                <ul key={idx} className="list-disc pl-5 flex flex-col gap-2 text-stone-600 my-2 text-sm sm:text-base text-left">
+                  {block.items.map((item, itemIdx) => (
+                    <li key={itemIdx}>
+                      {renderTextWithBold(item)}
+                    </li>
+                  ))}
+                </ul>
+              );
+            case 'numbered-list':
+              return (
+                <ol key={idx} className="list-decimal pl-5 flex flex-col gap-2 text-stone-600 my-2 text-sm sm:text-base text-left">
+                  {block.items.map((item, itemIdx) => (
+                    <li key={itemIdx}>
+                      {renderTextWithBold(item)}
+                    </li>
+                  ))}
+                </ol>
+              );
+            case 'paragraph':
+            default:
+              return block.items.map((paragraphText, pIdx) => (
+                <p key={`${idx}-${pIdx}`} className="leading-relaxed text-left">
+                  {renderTextWithBold(paragraphText)}
+                </p>
+              ));
           }
-          
-          // Numbered lists
-          if (trimmed.includes('1. ') || trimmed.includes('2. ') || trimmed.includes('3. ')) {
-            return (
-              <div key={pIdx} className="pl-4 flex flex-col gap-2 my-2 border-l-2 border-lani-primary/30">
-                {trimmed.split('\n').map((li, liIdx) => (
-                  <p key={liIdx} className="text-stone-600 text-sm sm:text-base">
-                    {li.trim()}
-                  </p>
-                ))}
-              </div>
-            );
-          }
-
-          // Bullet points
-          if (trimmed.startsWith('*')) {
-            return (
-              <ul key={pIdx} className="list-disc pl-5 flex flex-col gap-2 text-stone-600 my-2 text-sm sm:text-base">
-                {trimmed.split('\n').map((li, liIdx) => (
-                  <li key={liIdx}>
-                    {li.replace('*', '').trim()}
-                  </li>
-                ))}
-              </ul>
-            );
-          }
-
-          return (
-            <p key={pIdx} className="leading-relaxed">
-              {trimmed}
-            </p>
-          );
         })}
       </div>
+
+      {/* Video & Media Gallery */}
+      {(article.video || (article.gallery && article.gallery.length > 0)) && (
+        <div className="mt-12 pt-10 border-t border-stone-200/50">
+          <h3 className="font-heading text-2xl font-black text-lani-navy mb-6">
+            Media & Event Highlights
+          </h3>
+          
+          <div className="grid gap-8 md:grid-cols-2">
+            {/* Video Player Card */}
+            {article.video && (
+              <div className="flex flex-col gap-3">
+                <div className="relative overflow-hidden rounded-3xl bg-stone-950 aspect-video shadow-premium border border-stone-200/80 group">
+                  <video 
+                    src={article.video} 
+                    controls 
+                    className="w-full h-full object-cover"
+                    poster={article.image}
+                  />
+                </div>
+                <span className="text-xs text-stone-500 font-medium pl-2">
+                  Watch highlight coverage from the induction ceremony.
+                </span>
+              </div>
+            )}
+
+            {/* Gallery Images Card */}
+            {article.gallery && article.gallery.length > 0 && (
+              <div className="flex flex-col gap-3">
+                <div className={`grid gap-4 h-full ${article.video ? 'grid-cols-1' : 'grid-cols-2'}`}>
+                  {article.gallery.map((img, idx) => (
+                    <div key={idx} className="relative overflow-hidden rounded-3xl bg-stone-100 aspect-video shadow-premium group border border-stone-200/80">
+                      <img 
+                        src={img} 
+                        alt={`Event Highlight ${idx + 1}`} 
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                  ))}
+                </div>
+                <span className="text-xs text-stone-500 font-medium pl-2">
+                  Photos from the Bolton White Event Centre, Abuja.
+                </span>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Footer support card */}
       <div className="border-t border-stone-100 pt-8 mt-12 flex flex-col sm:flex-row items-center justify-between gap-6">

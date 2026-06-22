@@ -99,7 +99,7 @@ export default function Footer() {
                   <Link to="/thematic-focus" className="hover:text-white transition-colors">Our Thematic Focus</Link>
                 </li>
                 <li>
-                  <Link to="/articles" className="hover:text-white transition-colors">Read Articles & News</Link>
+                  <Link to="/articles" className="hover:text-white transition-colors">Read Articles & Impact</Link>
                 </li>
                 <li>
                   <Link to="/partners" className="hover:text-white transition-colors">Partners & Network</Link>
