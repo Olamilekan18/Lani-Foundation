@@ -8,7 +8,10 @@ import {
   BookOpen, 
   Search,
   ArrowRight,
-  FileText
+  FileText,
+  Accessibility,
+  ShieldCheck,
+  Activity
 } from 'lucide-react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -29,6 +32,109 @@ interface PartnerCategoryInfo {
   icon: React.ReactNode;
   actors: PartnerActor[];
 }
+
+const extendedOrganizations = [
+  {
+    name: 'International Organization for Migration (IOM - UN Migration)',
+    sector: 'Development & Reintegration',
+    icon: <Globe2 className="h-5 w-5 text-lani-primary" />
+  },
+  {
+    name: 'Department for International Development (DFID - UK)',
+    sector: 'International Development',
+    icon: <Globe2 className="h-5 w-5 text-lani-primary" />
+  },
+  {
+    name: 'Breakthrough Action-Nigeria (BA-N)',
+    sector: 'Public Health Advocacy',
+    icon: <Users className="h-5 w-5 text-lani-primary" />
+  },
+  {
+    name: 'Lagos State Ministry of Youth & Social Development',
+    sector: 'Government Agency',
+    icon: <Building2 className="h-5 w-5 text-lani-primary" />
+  },
+  {
+    name: 'Cross River State Ministry of Social Welfare',
+    sector: 'Government Agency',
+    icon: <Building2 className="h-5 w-5 text-lani-primary" />
+  },
+  {
+    name: 'Cross River State Office of the Public Defendant',
+    sector: 'Government Agency',
+    icon: <Building2 className="h-5 w-5 text-lani-primary" />
+  },
+  {
+    name: 'Nigeria Centre for Disease Control (NCDC)',
+    sector: 'Public Health & Safety',
+    icon: <ShieldCheck className="h-5 w-5 text-lani-primary" />
+  },
+  {
+    name: 'Red Cross Society',
+    sector: 'Emergency Response & Safety',
+    icon: <Activity className="h-5 w-5 text-lani-primary" />
+  },
+  {
+    name: 'Home of God’s Grace Mission Orphanage (Agbowa)',
+    sector: 'Social Care & Welfare',
+    icon: <HeartHandshake className="h-5 w-5 text-lani-primary" />
+  },
+  {
+    name: 'Agnus Dei Orphanage Home (Okota)',
+    sector: 'Social Care & Welfare',
+    icon: <HeartHandshake className="h-5 w-5 text-lani-primary" />
+  },
+  {
+    name: 'St. Joseph Choir of St. Jude Catholic Church (Mafoluko)',
+    sector: 'Faith-Based & Community',
+    icon: <Users className="h-5 w-5 text-lani-primary" />
+  },
+  {
+    name: 'Joint National Association of Persons with Disabilities (JONAPWD)',
+    sector: 'Social Inclusion Advocacy',
+    icon: <Accessibility className="h-5 w-5 text-lani-primary" />
+  },
+  {
+    name: 'West African Disability Coalitions',
+    sector: 'Social Inclusion Advocacy',
+    icon: <Accessibility className="h-5 w-5 text-lani-primary" />
+  },
+  {
+    name: 'Federal Radio Corporation of Nigeria (FRCN)',
+    sector: 'Media & Broadcasting',
+    icon: <Users className="h-5 w-5 text-lani-primary" />
+  },
+  {
+    name: 'West African Press Corps & Local Media Houses',
+    sector: 'Media & Journalism',
+    icon: <Users className="h-5 w-5 text-lani-primary" />
+  },
+  {
+    name: 'Redeemed Christian Church of God (Rose of Sharon Parish)',
+    sector: 'Faith-Based & Capacity',
+    icon: <BookOpen className="h-5 w-5 text-lani-primary" />
+  },
+  {
+    name: 'Grassroots Non-Formal Education Units',
+    sector: 'Capacity Building',
+    icon: <BookOpen className="h-5 w-5 text-lani-primary" />
+  },
+  {
+    name: 'Local Caregiver Networks',
+    sector: 'Capacity Building',
+    icon: <BookOpen className="h-5 w-5 text-lani-primary" />
+  },
+  {
+    name: 'LANI Group',
+    sector: 'Strategic Partner',
+    icon: <Building2 className="h-5 w-5 text-lani-primary" />
+  },
+  {
+    name: 'LANI Consulting',
+    sector: 'Strategic Partner',
+    icon: <Building2 className="h-5 w-5 text-lani-primary" />
+  }
+];
 
 export default function Partners() {
   const [filter, setFilter] = useState('all');
@@ -52,10 +158,12 @@ export default function Partners() {
 
   const categories = [
     { id: 'all', name: 'All Networks' },
-    { id: 'strategic', name: 'Strategic & Dev' },
+    { id: 'strategic-dev', name: 'Strategic & Dev' },
     { id: 'public-govt', name: 'Government & Public' },
     { id: 'care-welfare', name: 'Care Homes & Schools' },
     { id: 'advocacy-media', name: 'Advocacy & Media' },
+    { id: 'education-training', name: 'Capacity Building' },
+    { id: 'icd-network', name: 'Disability & ICD' },
   ];
 
   const partnersData: PartnerCategoryInfo[] = [
@@ -93,7 +201,7 @@ export default function Partners() {
         {
           name: 'Cross River State Government Agencies',
           project: 'Rebuild Calabar Initiative',
-          whatWeDid: 'Participated as a founding coalition partner in post-crisis community recovery, supporting local economic rebuilding, infrastructure rehabilitation, and community resilience.'
+          whatWeDid: 'Participated as a founding coalition partner in post-crisis community recovery (Rebuild Calabar), supporting local economic rebuilding, infrastructure rehabilitation, and community resilience.'
         }
       ]
     },
@@ -107,12 +215,17 @@ export default function Partners() {
         {
           name: 'Home of God’s Grace Mission Orphanage',
           project: 'Orphanage Library & Literacy Initiative',
-          whatWeDid: 'Launched an education enrichment campaign that established a fully equipped library and reading circles to foster learning culture for vulnerable children.'
+          whatWeDid: 'Launched an education enrichment campaign that established a fully equipped library and reading circles for children aged 3 to 18 years to foster a learning culture.'
         },
         {
           name: 'Agnus Dei Orphanage',
           project: 'Educational Book Donation Drive',
           whatWeDid: 'Delivered targeted curriculum-based learning materials and hosted community reading sessions to improve educational accessibility for institutionalized learners.'
+        },
+        {
+          name: 'St. Joseph Choir of St. Jude Catholic Church',
+          project: 'Agnus Dei Orphanage Support',
+          whatWeDid: 'Partnered with LANI Foundation to donate educational books and support materials to Agnus Dei Orphanage Home in Okota, Lagos.'
         }
       ]
     },
@@ -124,14 +237,14 @@ export default function Partners() {
       icon: <Users className="h-6 w-6" />,
       actors: [
         {
-          name: 'West African Disability Coalitions & JONAPWD',
-          project: 'International Conference on Disabilities',
-          whatWeDid: 'Served as a key strategic partner and facilitator for a regional conference, aligning dialogs on health, education, and livelihood policies for persons with disabilities.'
+          name: 'West African Press Corps & Local Media Houses',
+          project: 'Disability-Sensitive Media Training',
+          whatWeDid: 'Trained journalists on respectful reporting terminology to combat exclusion and challenge stigma against persons with disabilities.'
         },
         {
-          name: 'West African Press Corps & Local Media Houses',
-          project: 'Disability-Sensitive Media & COVID-19 Risk Campaigns',
-          whatWeDid: 'Trained journalists on respectful reporting terminology to combat exclusion, and deployed COVID-19 risk communication frameworks to reduce misinformation and panic.'
+          name: 'Breakthrough Action-Nigeria, NCDC & FRCN',
+          project: 'COVID-19 Risk Communication Campaigns',
+          whatWeDid: 'Trained over 100 media reporters (mostly FRCN staff) on effective and factual reporting to improve compliance with safety directives in grassroots communities.'
         }
       ]
     },
@@ -148,25 +261,40 @@ export default function Partners() {
           whatWeDid: 'Delivered intensive workshops for grassroots instructors on modern classroom management, child-centered teaching methodologies, and emotional support tracking.'
         },
         {
-          name: 'Local Caregiver Networks',
-          project: 'Caregiver CPR, First Aid & Disaster Training',
-          whatWeDid: 'Provided first aid training and distributed fully equipped emergency response boxes across multiple caregiver settings to build institutional emergency readiness.'
+          name: 'Local Caregiver Networks & Red Cross',
+          project: 'Caregiver BLS, CPR & First Aid Training',
+          whatWeDid: 'Partnered with the Red Cross and Cross River State Ministry of Social Welfare to provide Basic Life Support (BLS) and CPR training for caregivers and distribute emergency response boxes.'
+        },
+        {
+          name: 'RCCG, Rose of Sharon Parish staff',
+          project: 'Teacher Capacity Building Workshop',
+          whatWeDid: 'Trained Sunday school teachers and parish staff on effective classroom management and child support tracking methods.'
+        }
+      ]
+    },
+    {
+      id: 'icd-network',
+      name: 'International Conference on Disabilities (ICD)',
+      tagline: 'West African regional disability inclusion network',
+      desc: 'We served as a strategic partner and facilitator for the landmark International Conference on Disabilities in West Africa, driving policy dialogs and multi-sector advocacy.',
+      icon: <Accessibility className="h-6 w-6" />,
+      actors: [
+        {
+          name: 'Department for International Development (DFID)',
+          project: 'ICD Lagos 2015 Conference',
+          whatWeDid: 'Partnered to organize the first International Conference on Disabilities in West Africa, addressing inclusion barriers and aligning policy conversations.'
+        },
+        {
+          name: 'West African Disability Coalitions & JONAPWD',
+          project: 'Regional Policy Dialogue',
+          whatWeDid: 'Aligned regional dialogue on health, education, and livelihood policies for persons with disabilities to tackle systemic exclusion.'
         }
       ]
     }
   ];
 
-  // Helper to map category IDs for filter buttons
-  const getFilterCategory = (pId: string): string => {
-    if (pId.includes('strategic')) return 'strategic';
-    if (pId.includes('public')) return 'public-govt';
-    if (pId.includes('care')) return 'care-welfare';
-    if (pId.includes('advocacy') || pId.includes('education')) return 'advocacy-media';
-    return 'strategic';
-  };
-
   const filteredPartners = partnersData.filter(item => {
-    const matchesFilter = filter === 'all' || getFilterCategory(item.id) === filter;
+    const matchesFilter = filter === 'all' || item.id === filter;
     const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
                           item.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           item.actors.some(actor => 
@@ -305,6 +433,40 @@ export default function Partners() {
               </button>
             </div>
           )}
+        </div>
+      </section>
+
+      {/* EXTENDED ORGANIZATION NETWORK */}
+      <section className="py-20 bg-stone-100/50 border-t border-stone-200/30">
+        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12 text-center">
+          <span className="eyebrow mx-auto">Collaborative Network</span>
+          <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-lani-navy tracking-tight mt-3">
+            Organizations We Have Collaborated With
+          </h2>
+          <p className="mx-auto max-w-2xl mt-4 text-stone-600 text-xs sm:text-sm leading-relaxed mb-12">
+            Over the years, LANI Foundation and our parent LANI Group have partnered with diverse public institutions, international development agencies, faith-based organizations, and civil society groups to deliver transparent, verify-friendly, and sustainable development outcomes.
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 text-left">
+            {extendedOrganizations.map((org, index) => (
+              <div 
+                key={index}
+                className="bg-white border border-stone-200/60 rounded-2xl p-5 hover:border-lani-primary/30 hover:shadow-premium hover:-translate-y-1 transition-all duration-300 flex items-start gap-4 group"
+              >
+                <div className="h-10 w-10 rounded-xl bg-stone-50 text-stone-500 flex items-center justify-center shrink-0 border border-stone-100 group-hover:bg-lani-primary/10 group-hover:text-lani-primary transition-colors">
+                  {org.icon}
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold text-lani-navy leading-snug group-hover:text-lani-primary transition-colors">
+                    {org.name}
+                  </h4>
+                  <span className="text-[9px] text-stone-400 font-extrabold uppercase tracking-wider block mt-1">
+                    {org.sector}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
