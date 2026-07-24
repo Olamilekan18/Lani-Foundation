@@ -5,6 +5,7 @@ import { useGSAP } from '@gsap/react';
 import aniBasseyImg from '../assets/ani-charles-bassey.png';
 import luqmanImg from '../assets/luqman-musah-ozekhome.jpg';
 import philipImg from '../assets/philip-uwumarogie.jpg';
+import olaniyiImg from '../assets/olaniyi-omole.png';
 
 export default function About() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -182,13 +183,14 @@ export default function About() {
     {
       id: 'olaniyi-omole',
       name: 'Olaniyi Omole',
-      role: 'Head of Partnerships & Impact Programs',
-      shortBio: 'Leads our university liaison campaigns, research grant screening, and builds corporate network alliances for program expansion.',
+      role: 'Head of Training Services, LANI Consulting',
+      shortBio: 'Leads and coordinates training design, delivery, and quality assurance across the Group, overseeing entrepreneurship, employability, and capacity-building programmes.',
       fullBio: [
-        "Olaniyi Omole leads our university liaison campaigns, research grant screening, and builds corporate network alliances for program expansion.",
-        "He drives cross-sector collaborations with public institutions, civil society, and corporate partners to scale LANI Foundation's social impact projects."
+        "Olaniyi Omole is the Head of Training Services at Lani Consulting Limited, where he leads and coordinates training design, delivery, and quality assurance across the Group. In this role, he oversees the development of entrepreneurship, employability, and capacity-building programmes; integrates technology to enhance training efficiency and data intelligence; and ensures governance, consistency, and impact across all training expressions within the organisation.",
+        "With over 15 years of professional experience, Olaniyi brings strong expertise in curriculum and instructional design, training operations management, stakeholder coordination, and programme scaling. He has a proven track record in developing and managing end-to-end training pipelines, from concept development and facilitation to assessment, reporting, and continuous improvement, while aligning programmes with organisational strategy and client objectives.",
+        "He holds a B.Sc. (Hons) in Political Science and a Diploma in Public Administration, supported by advanced certifications in MSME training of trainers, vocational and skills development, digital learning, and professional communication. Olaniyi is passionate about building robust, scalable, and impact-driven training systems that strengthen human capital, support enterprise growth, and deliver measurable outcomes across the Lani Consulting Group."
       ],
-      image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=80',
+      image: olaniyiImg,
     },
   ];
 
