@@ -3,6 +3,7 @@ import { Target, Eye, ShieldCheck, Heart, User, CheckCircle2, Award, Users, Scal
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import aniBasseyImg from '../assets/ani-charles-bassey.png';
+import luqmanImg from '../assets/luqman-musah-ozekhome.jpg';
 
 export default function About() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -152,13 +153,16 @@ export default function About() {
     {
       id: 'luqman-musah-ozekhome',
       name: 'Luqman Musah Ozekhome',
-      role: 'Executive Director & Trustee',
-      shortBio: 'Brings decades of legal and management advisory experience. Spearheads foundation compliance, governance, and structural program integrity.',
+      role: 'Programme Officer, LANI Foundation',
+      shortBio: 'Supports the planning, coordination, implementation, and monitoring of community development, economic empowerment, and social impact initiatives.',
       fullBio: [
-        "Luqman Musah Ozekhome brings decades of legal and management advisory experience. Spearheads foundation compliance, governance, and structural program integrity.",
-        "He plays an essential role in guiding the foundation's governance structures, ensuring alignment with national statutory frameworks, and maintaining accountability across all community interventions."
+        "Luqman Musah Ozekhome is the Programme Officer, LANI Foundation, the philanthropic arm of LANI Group, where he supports the planning, coordination, implementation, and monitoring of community development, economic empowerment, and social impact initiatives.",
+        "With over five years of experience in livelihoods programming, entrepreneurship support, vocational skills development, and community-based interventions, Luqman brings expertise in programme management, stakeholder engagement, beneficiary support, and sustainable socio-economic development.",
+        "Prior to joining LANI Foundation, he worked across livelihood and reintegration programmes supporting vulnerable populations, including returnees, migrants, women, youth, and underserved communities through skills development, business support, and income-generating initiatives.",
+        "He holds a Higher National Diploma (HND) in Business Administration and Management from Federal Polytechnic Auchi and has completed professional training in Financial Literacy, MSME Training of Trainers, Mental Health and Psychosocial Support (MHPSS), Psychological First Aid (PFA), and Sustainable Socio-Economic Reintegration, including programmes delivered by GIZ/GOPA and the International Organization for Migration (IOM).",
+        "Luqman is passionate about strengthening community resilience, expanding economic opportunities, and driving sustainable development outcomes through innovative and people-centred programmes."
       ],
-      image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80',
+      image: luqmanImg,
     },
     {
       id: 'philip-uwumarogie',
