@@ -359,7 +359,7 @@ export default function About() {
                     <img 
                       src={member.image} 
                       alt={member.name} 
-                      className="h-60 w-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                      className="h-60 w-full object-cover object-top grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-stone-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                       <span className="text-white text-xs font-bold flex items-center gap-1.5 bg-lani-primary/90 backdrop-blur-sm px-3 py-1.5 rounded-full shadow">
@@ -421,7 +421,7 @@ export default function About() {
                 <img 
                   src={selectedMember.image} 
                   alt={selectedMember.name} 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
                 />
               </div>
               <div className="flex-1 pr-6">
