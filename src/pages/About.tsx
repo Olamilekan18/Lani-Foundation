@@ -437,17 +437,6 @@ export default function About() {
                 <p key={i}>{paragraph}</p>
               ))}
             </div>
-
-            {/* Modal Footer Controls */}
-            <div className="mt-8 pt-4 border-t border-stone-100 flex flex-wrap items-center justify-between text-xs text-stone-400">
-              <span>Press <kbd className="px-1.5 py-0.5 bg-stone-100 border border-stone-300 rounded font-mono text-[10px] text-stone-600">ESC</kbd> or click anywhere outside to close</span>
-              <button 
-                onClick={() => setSelectedMember(null)}
-                className="mt-2 sm:mt-0 px-4 py-2 bg-stone-100 hover:bg-stone-200 font-bold text-stone-700 rounded-full transition-colors"
-              >
-                Close Profile
-              </button>
-            </div>
           </div>
         </div>
       )}
