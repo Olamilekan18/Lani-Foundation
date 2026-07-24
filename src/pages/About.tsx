@@ -2,6 +2,7 @@ import { useRef, useEffect } from 'react';
 import { Target, Eye, ShieldCheck, Heart, User, CheckCircle2, Award, Users, Scale, Star, HelpingHand } from 'lucide-react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import aniBasseyImg from '../assets/ani-charles-bassey.png';
 
 export default function About() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -117,7 +118,7 @@ export default function About() {
       name: 'Ani Charles Bassey-Eyo',
       role: 'Founder & Chairman',
       bio: 'Visionary entrepreneur and CEO of LANI Group. Committed to structural advocacy, taxation studies funding, and social reintegration across Nigeria.',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80',
+      image: aniBasseyImg,
     },
     {
       name: 'Luqman Musah Ozekhome',
