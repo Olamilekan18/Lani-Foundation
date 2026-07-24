@@ -4,6 +4,7 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import aniBasseyImg from '../assets/ani-charles-bassey.png';
 import luqmanImg from '../assets/luqman-musah-ozekhome.jpg';
+import philipImg from '../assets/philip-uwumarogie.jpg';
 
 export default function About() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -167,13 +168,16 @@ export default function About() {
     {
       id: 'philip-uwumarogie',
       name: 'Philip Uwumarogie',
-      role: 'Chief Operating Officer',
-      shortBio: 'Operations strategist leading program implementations. Coordinates field officers, sustainability audits, and community outreach campaigns.',
+      role: 'Chief Technology Officer, LANI Consulting',
+      shortBio: 'Oversees technology strategy, enterprise solution architecture, and digital transformation initiatives across the Group\'s advisory and innovation portfolios.',
       fullBio: [
-        "Philip Uwumarogie is an operations strategist leading program implementations. Coordinates field officers, sustainability audits, and community outreach campaigns.",
-        "With a strong focus on field execution and continuous evaluation, Philip manages multi-partner operations to ensure transparent resource allocation and long-term project viability."
+        "Philip Uwumarogie is the Chief Technology Officer of LANI Consulting at LANI Group, where he oversees technology strategy, enterprise solution architecture, and digital transformation initiatives across the Group's advisory and innovation portfolios.",
+        "With over 25 years of experience spanning technology, financial services, capital markets, and public sector transformation, Philip brings expertise in enterprise architecture, financial systems, digital infrastructure, emerging technologies, and large-scale systems integration.",
+        "Prior to joining LANI Group, he held technology leadership and advisory roles across the banking, capital markets, and government sectors, contributing to pioneering initiatives in online brokerage platforms, digital payments, market infrastructure, and public-sector information systems.",
+        "He holds a B.Sc. (Hons) in Computer Science from the University of Lagos, is a Microsoft Certified Professional, and has completed the Senior Management Programme at Lagos Business School.",
+        "Philip is passionate about leveraging technology to strengthen institutions, expand economic opportunity, and deliver practical solutions that create lasting value for businesses, governments, and communities."
       ],
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=800&q=80',
+      image: philipImg,
     },
     {
       id: 'olaniyi-omole',
