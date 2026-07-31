@@ -155,12 +155,12 @@ export default function About() {
     {
       id: 'luqman-musah-ozekhome',
       name: 'Luqman Musah Ozekhome',
-      role: 'Programme Officer, LANI Foundation',
+      role: 'Programme Officer',
       shortBio: 'Supports the planning, coordination, implementation, and monitoring of community development, economic empowerment, and social impact initiatives.',
       fullBio: [
-        "Luqman Musah Ozekhome is the Programme Officer, LANI Foundation, the philanthropic arm of LANI Group, where he supports the planning, coordination, implementation, and monitoring of community development, economic empowerment, and social impact initiatives.",
+        "Luqman Musah Ozekhome is the Programme Officer at LANI Group, where he supports the planning, coordination, implementation, and monitoring of community development, economic empowerment, and social impact initiatives.",
         "With over five years of experience in livelihoods programming, entrepreneurship support, vocational skills development, and community-based interventions, Luqman brings expertise in programme management, stakeholder engagement, beneficiary support, and sustainable socio-economic development.",
-        "Prior to joining LANI Foundation, he worked across livelihood and reintegration programmes supporting vulnerable populations, including returnees, migrants, women, youth, and underserved communities through skills development, business support, and income-generating initiatives.",
+        "Prior to joining LANI Group, he worked across livelihood and reintegration programmes supporting vulnerable populations, including returnees, migrants, women, youth, and underserved communities through skills development, business support, and income-generating initiatives.",
         "He holds a Higher National Diploma (HND) in Business Administration and Management from Federal Polytechnic Auchi and has completed professional training in Financial Literacy, MSME Training of Trainers, Mental Health and Psychosocial Support (MHPSS), Psychological First Aid (PFA), and Sustainable Socio-Economic Reintegration, including programmes delivered by GIZ/GOPA and the International Organization for Migration (IOM).",
         "Luqman is passionate about strengthening community resilience, expanding economic opportunities, and driving sustainable development outcomes through innovative and people-centred programmes."
       ],
@@ -169,10 +169,10 @@ export default function About() {
     {
       id: 'philip-uwumarogie',
       name: 'Philip Uwumarogie',
-      role: 'Chief Technology Officer, LANI Consulting',
+      role: 'Chief Technology Officer',
       shortBio: 'Oversees technology strategy, enterprise solution architecture, and digital transformation initiatives across the Group\'s advisory and innovation portfolios.',
       fullBio: [
-        "Philip Uwumarogie is the Chief Technology Officer of LANI Consulting at LANI Group, where he oversees technology strategy, enterprise solution architecture, and digital transformation initiatives across the Group's advisory and innovation portfolios.",
+        "Philip Uwumarogie is the Chief Technology Officer at LANI Group, where he oversees technology strategy, enterprise solution architecture, and digital transformation initiatives across the Group's advisory and innovation portfolios.",
         "With over 25 years of experience spanning technology, financial services, capital markets, and public sector transformation, Philip brings expertise in enterprise architecture, financial systems, digital infrastructure, emerging technologies, and large-scale systems integration.",
         "Prior to joining LANI Group, he held technology leadership and advisory roles across the banking, capital markets, and government sectors, contributing to pioneering initiatives in online brokerage platforms, digital payments, market infrastructure, and public-sector information systems.",
         "He holds a B.Sc. (Hons) in Computer Science from the University of Lagos, is a Microsoft Certified Professional, and has completed the Senior Management Programme at Lagos Business School.",
@@ -183,12 +183,12 @@ export default function About() {
     {
       id: 'olaniyi-omole',
       name: 'Olaniyi Omole',
-      role: 'Head of Training Services, LANI Consulting',
+      role: 'Head of Training Services',
       shortBio: 'Leads and coordinates training design, delivery, and quality assurance across the Group, overseeing entrepreneurship, employability, and capacity-building programmes.',
       fullBio: [
-        "Olaniyi Omole is the Head of Training Services at Lani Consulting Limited, where he leads and coordinates training design, delivery, and quality assurance across the Group. In this role, he oversees the development of entrepreneurship, employability, and capacity-building programmes; integrates technology to enhance training efficiency and data intelligence; and ensures governance, consistency, and impact across all training expressions within the organisation.",
+        "Olaniyi Omole is the Head of Training Services at LANI Group, where he leads and coordinates training design, delivery, and quality assurance across the Group. In this role, he oversees the development of entrepreneurship, employability, and capacity-building programmes; integrates technology to enhance training efficiency and data intelligence; and ensures governance, consistency, and impact across all training expressions within the organisation.",
         "With over 15 years of professional experience, Olaniyi brings strong expertise in curriculum and instructional design, training operations management, stakeholder coordination, and programme scaling. He has a proven track record in developing and managing end-to-end training pipelines, from concept development and facilitation to assessment, reporting, and continuous improvement, while aligning programmes with organisational strategy and client objectives.",
-        "He holds a B.Sc. (Hons) in Political Science and a Diploma in Public Administration, supported by advanced certifications in MSME training of trainers, vocational and skills development, digital learning, and professional communication. Olaniyi is passionate about building robust, scalable, and impact-driven training systems that strengthen human capital, support enterprise growth, and deliver measurable outcomes across the Lani Consulting Group."
+        "He holds a B.Sc. (Hons) in Political Science and a Diploma in Public Administration, supported by advanced certifications in MSME training of trainers, vocational and skills development, digital learning, and professional communication. Olaniyi is passionate about building robust, scalable, and impact-driven training systems that strengthen human capital, support enterprise growth, and deliver measurable outcomes across the LANI Group."
       ],
       image: olaniyiImg,
     },
