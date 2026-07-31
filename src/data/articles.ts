@@ -1,3 +1,4 @@
+// LANI Foundation Articles & Media Feed Data - Updated July 31, 2026
 import citn1 from '../assets/CITN1.png';
 import citn2 from '../assets/CITN2.png';
 import citn3 from '../assets/CITN3.mp4';
