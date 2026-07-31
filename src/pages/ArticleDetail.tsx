@@ -18,7 +18,7 @@ function renderTextWithBold(text: string) {
 }
 
 interface MarkdownBlock {
-  type: 'paragraph' | 'heading' | 'bullet-list' | 'numbered-list';
+  type: 'paragraph' | 'heading' | 'bullet-list' | 'numbered-list' | 'pull-quote' | 'image';
   items: string[];
 }
 
@@ -43,6 +43,30 @@ function parseMarkdown(content: string): MarkdownBlock[] {
       }
       blocks.push({ type: 'heading', items: [trimmed.replace('###', '').trim()] });
       currentBlock = null;
+    } else if (trimmed.startsWith('>')) {
+      if (currentBlock) {
+        blocks.push(currentBlock);
+      }
+      blocks.push({ type: 'pull-quote', items: [trimmed.replace(/^>\s*/, '').trim()] });
+      currentBlock = null;
+    } else if (trimmed.startsWith('![')) {
+      const match = trimmed.match(/^!\[(.*?)\]\((.*?)\)$/);
+      if (match) {
+        if (currentBlock) {
+          blocks.push(currentBlock);
+        }
+        blocks.push({ type: 'image', items: [match[1], match[2]] });
+        currentBlock = null;
+      } else {
+        if (currentBlock && currentBlock.type !== 'paragraph') {
+          blocks.push(currentBlock);
+          currentBlock = null;
+        }
+        if (!currentBlock) {
+          currentBlock = { type: 'paragraph', items: [] };
+        }
+        currentBlock.items.push(trimmed);
+      }
     } else if (trimmed.startsWith('*')) {
       if (currentBlock && currentBlock.type !== 'bullet-list') {
         blocks.push(currentBlock);
@@ -154,11 +178,11 @@ export default function ArticleDetail() {
       </h1>
 
       {/* Hero Image */}
-      <div className="w-full h-[250px] sm:h-[400px] overflow-hidden rounded-3xl bg-stone-100 mb-10 shadow-md">
+      <div className="w-full max-h-[550px] overflow-hidden rounded-3xl bg-stone-50 mb-10 shadow-md flex justify-center">
         <img 
           src={article.image} 
           alt={article.title} 
-          className="w-full h-full object-cover object-top"
+          className="max-w-full max-h-[550px] h-auto w-auto object-contain"
         />
       </div>
 
@@ -192,6 +216,32 @@ export default function ArticleDetail() {
                   ))}
                 </ol>
               );
+            case 'pull-quote':
+              return (
+                <div key={idx} className="my-10 px-8 py-10 border-l-4 border-lani-primary bg-stone-50 rounded-r-3xl relative overflow-hidden shadow-sm">
+                  <div className="absolute -top-6 -left-2 text-stone-200/40 text-8xl font-serif select-none pointer-events-none">“</div>
+                  <blockquote className="font-heading text-lg sm:text-xl font-bold italic text-lani-navy relative z-10 leading-relaxed text-left">
+                    {renderTextWithBold(block.items[0])}
+                  </blockquote>
+                </div>
+              );
+            case 'image':
+              return (
+                <div key={idx} className="my-8 flex flex-col gap-3">
+                  <div className="w-full overflow-hidden rounded-3xl bg-stone-50 border border-stone-200/40 shadow-sm max-h-[500px] flex justify-center">
+                    <img 
+                      src={block.items[1]} 
+                      alt={block.items[0]} 
+                      className="max-w-full max-h-[500px] h-auto w-auto object-contain"
+                    />
+                  </div>
+                  {block.items[0] && (
+                    <span className="text-xs text-stone-500 font-medium pl-2 text-center">
+                      {block.items[0]}
+                    </span>
+                  )}
+                </div>
+              );
             case 'paragraph':
             default:
               return block.items.map((paragraphText, pIdx) => (
@@ -210,7 +260,7 @@ export default function ArticleDetail() {
             Media & Event Highlights
           </h3>
           
-          <div className="grid gap-8 md:grid-cols-2">
+          <div className={`grid gap-8 ${article.video ? 'md:grid-cols-2' : 'grid-cols-1'}`}>
             {/* Video Player Card */}
             {article.video && (
               <div className="flex flex-col gap-3">
@@ -243,7 +293,7 @@ export default function ArticleDetail() {
                   ))}
                 </div>
                 <span className="text-xs text-stone-500 font-medium pl-2">
-                  Photos from the Bolton White Event Centre, Abuja.
+                  {article.galleryDescription || "Photos from the event highlights."}
                 </span>
               </div>
             )}

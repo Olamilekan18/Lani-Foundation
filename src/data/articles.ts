@@ -1,6 +1,9 @@
 import citn1 from '../assets/CITN1.png';
 import citn2 from '../assets/CITN2.png';
 import citn3 from '../assets/CITN3.mp4';
+import gtco1 from '../assets/gtco_image1.png';
+import gtco2 from '../assets/gtco_image2.jpg';
+import gtco3 from '../assets/gtco_image3.jpg';
 
 export interface Article {
   id: string;
@@ -13,9 +16,76 @@ export interface Article {
   content: string;
   video?: string;
   gallery?: string[];
+  galleryDescription?: string;
 }
 
 export const articlesData: Article[] = [
+  {
+    id: 'beyond-awareness-gtco-autism-conference',
+    title: 'Beyond Awareness: LANI Foundation Reflects on Autism Acceptance and Inclusion at the 16th GTCO Autism Conference',
+    excerpt: 'Autism awareness has grown significantly over the years, but awareness alone does not create inclusion. The more important question is whether our homes, schools, workplaces and communities are becoming places where individuals on the autism spectrum can participate, contribute and thrive.',
+    category: 'Education',
+    date: 'July 28, 2026',
+    readTime: '5 min read',
+    image: gtco2,
+    gallery: [gtco1, gtco3],
+    galleryDescription: 'Photos from the 16th Annual GTCO Autism Conference at the MUSON Centre, Onikan, Lagos.',
+    content: `
+      Autism awareness has grown significantly over the years, but awareness alone does not create inclusion. The more important question is whether our homes, schools, workplaces and communities are becoming places where individuals on the autism spectrum can participate, contribute and thrive.
+
+      This was one of the central reflections from the 16th Annual GTCO Autism Conference, which LANI Foundation attended on 27 and 28 July 2026 at the MUSON Centre, Onikan, Lagos.
+
+      The two-day conference brought together autism specialists, advocates, parents, caregivers, educators and individuals with lived experience to share knowledge, exchange perspectives and explore practical approaches to autism acceptance and inclusion.
+
+      ### From Awareness to Practical Action
+
+      Across the conference sessions, discussions went beyond understanding autism to examining the practical steps required to support individuals on the spectrum and their families.
+
+      Key areas explored included understanding and responding to behaviour in homes and classrooms, practical strategies for communication and regulation, daily routines, autism and mental health, family support, school and classroom readiness, and the development of inclusive learning environments.
+
+      The conversations also looked beyond childhood and education. Participants explored employment pathways for adults on the spectrum and the importance of creating neuroinclusive spaces across different stages of life.
+
+      These discussions reinforced an important point: autism inclusion cannot stop at awareness. It must be reflected in the environments and opportunities we create.
+
+      ![LANI Foundation delegation at the 16th Annual GTCO Autism Conference.](${gtco1})
+
+      > “Awareness is only the beginning. Acceptance must become action.”
+
+      ### Learning, Connection and Collaboration
+
+      For LANI Foundation, the conference provided an opportunity not only to learn but also to connect with people and organisations working across different areas of autism support and inclusion.
+
+      Engagements with specialists, advocates, parents and other stakeholders offered valuable perspectives on the realities faced by individuals on the spectrum and their families. They also created room to explore potential collaborations that could extend autism education, caregiver support and inclusive practices to more communities.
+
+      At LANI Foundation, we recognise that lasting community impact is strengthened through collaboration. Building more inclusive communities requires schools, employers, healthcare professionals, civil society organisations, advocates, parents and community leaders to work together and translate knowledge into practical action.
+
+      ![Engaging with specialists, advocates, and stakeholders during the sessions.](${gtco2})
+
+      ### Inclusion Must Extend Across Communities
+
+      One of the strongest takeaways from the conference was the need to think about inclusion beyond individual programmes or awareness campaigns.
+
+      A truly inclusive community is one where consideration for neurodiversity is reflected in the way spaces are designed, services are delivered, education is provided and opportunities are created.
+
+      For schools, this may mean strengthening classroom readiness and adopting more inclusive learning practices. For employers, it may mean creating pathways into meaningful employment for adults on the spectrum. For families and caregivers, it may mean having access to better information, support and practical tools.
+
+      Each of these steps contributes to a broader culture of acceptance.
+
+      ![Exploring neuroinclusive systems and education tools with stakeholders.](${gtco3})
+
+      ### Continuing the Conversation
+
+      LANI Foundation commends GTCO for sustaining the Autism Conference and for continuing to provide a platform for meaningful conversations around autism, inclusion and the wellbeing of individuals on the spectrum and their families.
+
+      We left the conference better informed, inspired and even more committed to supporting inclusive communities where every individual is seen, respected, supported and given the opportunity to reach their full potential.
+
+      At LANI Foundation, we believe awareness is only the beginning. Real progress occurs when awareness becomes acceptance, and acceptance is translated into practical and measurable action.
+
+      We invite schools, employers, healthcare professionals, civil society organisations, autism advocates, parents and community leaders to partner with us in advancing autism awareness, caregiver support, inclusive education, community sensitisation and employment opportunities for individuals on the spectrum.
+
+      If your organisation is interested in working with LANI Foundation in any of these areas, we welcome the opportunity to connect and explore how we can contribute to more inclusive communities together.
+    `
+  },
   {
     id: 'lani-champions-excellence-citn',
     title: 'LANI Foundation Champions Academic Excellence at the 54th CITN Induction Ceremony',
@@ -26,6 +96,7 @@ export const articlesData: Article[] = [
     image: citn1,
     video: citn3,
     gallery: [citn2],
+    galleryDescription: 'Photos from the Bolton White Event Centre, Abuja.',
     content: `
       LANI Foundation recently participated in the 54th Induction Ceremony of the Chartered Institute of Taxation of Nigeria (CITN), held on April 30, 2026, at the Bolton White Event Centre, Abuja. The event brought together tax professionals, industry leaders, policymakers, and newly inducted members, underscoring CITN’s continued commitment to excellence and professional integrity within Nigeria’s taxation ecosystem.
 
@@ -83,7 +154,7 @@ export const articlesData: Article[] = [
     category: 'Livelihoods',
     date: 'April 15, 2026',
     readTime: '7 min read',
-    image: 'https://images.unsplash.com/photo-1464234471565-33b517abc292?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=800&auto=format&fit=crop',
     content: `
       Resettling after returning from forced migration is an emotional and economic journey. Without stable pathways to livelihood creation, returned migrants face severe vulnerability and pressure to embark on unsafe journeys again.
 
