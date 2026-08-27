@@ -19,7 +19,7 @@ export default function Articles() {
   }, []);
 
   // Filter categories list
-  const categories = ['All', 'Education', 'Systems & Capacity', 'Livelihoods', 'Child Protection'];
+  const categories = ['All', 'Education', 'Systems & Capacity', 'Livelihoods', 'Child Protection', 'Community Outreach'];
 
   const filteredArticles = selectedCategory === 'All'
     ? articlesData
@@ -98,7 +98,7 @@ export default function Articles() {
                     <img 
                       src={art.image} 
                       alt={art.title} 
-                      className="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-105"
+                      className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105"
                       loading="lazy"
                     />
                   </Link>

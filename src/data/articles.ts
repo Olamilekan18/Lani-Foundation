@@ -1,26 +1,103 @@
-// LANI Foundation Articles & Media Feed Data - Updated July 31, 2026
+// LANI Foundation Articles & Media Feed Data - Updated August 2026
 import citn1 from '../assets/CITN1.png';
 import citn2 from '../assets/CITN2.png';
 import citn3 from '../assets/CITN3.mp4';
 import gtco1 from '../assets/gtco_image1.png';
 import gtco2 from '../assets/gtco_image2.jpg';
 import gtco3 from '../assets/gtco_image3.jpg';
+import lagosOutreach1 from '../assets/lagos-outreach-1.jpg';
+import lagosOutreach2 from '../assets/lagos-outreach-2.jpg';
+import lagosOutreach3 from '../assets/lagos-outreach-3.jpg';
+import lagosOutreach4 from '../assets/lagos-outreach-4.jpg';
+import lagosOutreach5 from '../assets/lagos-outreach-5.jpg';
+import lagosOutreach6 from '../assets/lagos-outreach-6.jpg';
+import lagosOutreach7 from '../assets/lagos-outreach-7.jpg';
+import lagosOutreach8 from '../assets/lagos-outreach-8.jpg';
 
 export interface Article {
   id: string;
   title: string;
   excerpt: string;
-  category: 'Education' | 'Systems & Capacity' | 'Livelihoods' | 'Child Protection';
+  category: 'Education' | 'Systems & Capacity' | 'Livelihoods' | 'Child Protection' | 'Community Outreach';
   date: string;
   readTime: string;
   image: string;
   content: string;
   video?: string;
+  videoCaption?: string;
   gallery?: string[];
+  galleryCaption?: string;
   galleryDescription?: string;
 }
 
 export const articlesData: Article[] = [
+  {
+    id: 'world-humanitarian-day-2026-lagos-outreach',
+    title: 'LANI Foundation Marks World Humanitarian Day 2026 with Lagos Community Outreach',
+    excerpt: 'From the Streets of Lagos: How LANI Foundation is turning empathy into direct grassroots action, meeting immediate community needs and strengthening local solidarity.',
+    category: 'Community Outreach',
+    date: 'August 19, 2026',
+    readTime: '4 min read',
+    image: lagosOutreach1,
+    gallery: [
+      lagosOutreach1,
+      lagosOutreach2,
+      lagosOutreach3,
+      lagosOutreach4,
+      lagosOutreach5,
+      lagosOutreach6,
+      lagosOutreach7,
+      lagosOutreach8
+    ],
+    galleryCaption: 'Photo highlights from LANI Foundation’s World Humanitarian Day 2026 community outreach across Lagos.',
+    content: `
+      Every August, the world pauses to observe World Humanitarian Day, a moment to honour the people and institutions working, often quietly, to make life more dignified for others. In 2026, Nigeria's national observance carried a theme that felt less like a slogan and more like an instruction: **"Strengthening Global Solidarity and Empowering Local Communities."**
+
+      At LANI Foundation, the corporate social responsibility (CSR) arm of LANI Group, we took that instruction literally. Rather than mark the day with a press statement from behind a desk, our team hit the lively, sun-drenched streets of Lagos to do what solidarity actually requires: show up, in person, for the people who need it most.
+
+      ### What LANI Foundation Did on the Ground
+
+      This wasn't a symbolic drive-by. Our team spent the day fully immersed in the rhythm of the city, walking through neighbourhoods, engaging directly with residents, and treating every interaction as an opportunity to serve. The outreach centred on three simple but powerful acts:
+
+      * **Educating residents** on practical, everyday issues that affect community wellbeing.
+      * **Listening to the real stories** behind the faces we so often walk past because dignity begins with being heard.
+      * **Distributing essential palliatives** to individuals on the street, meeting immediate needs with immediate action.
+
+      There was no stage, no distance, no performance—just people meeting people where they are.
+
+      ### Why Local Action Is the Real Measure of Solidarity
+
+      It's easy to talk about global solidarity in the abstract. It is far harder and far more meaningful to translate it into something a person can hold in their hands or feel in a conversation. This is the leadership philosophy that anchors LANI Foundation's approach to community development in Lagos and beyond: impact is not measured by the size of an announcement, but by the depth of a connection.
+
+      Real, lasting change rarely begins in a boardroom. It begins on a pavement, in a market, on a street corner—the everyday spaces where people live, struggle, and hope. This is why LANI Foundation's model of community engagement is built around proximity, not distance; around listening first, and giving second. True solidarity isn't a headline. It is a choice—a daily, deliberate decision to see, to feel, and to support the people around us.
+
+      This is also, fundamentally, a leadership lesson that extends well beyond humanitarian work: organisations that lead well are organisations that stay close to the ground truth of the communities they serve. Whether in business, governance, or philanthropy, the leaders who create the most enduring impact are the ones willing to leave the boardroom and listen on the pavement.
+
+      ### World Humanitarian Day 2026: A Theme Built for Local Actors
+
+      Nigeria's 2026 commemoration of World Humanitarian Day, themed *"Strengthening Global Solidarity and Empowering Local Communities,"* placed deliberate emphasis on the role of local actors, community organisations, businesses, and grassroots responders in protecting lives and building resilience from the ground up. It is a recognition that humanitarian impact is not the exclusive preserve of large international agencies; it is equally, and perhaps more sustainably, driven by local institutions with roots already planted in the communities they serve.
+
+      LANI Foundation's Lagos outreach was a direct, practical response to that call, proof that meaningful humanitarian action doesn't have to originate from far away to be effective. Sometimes, the most strategic place to strengthen "global solidarity" is your own street.
+
+      ### Partner With LANI Foundation: We Cannot Do This Alone
+
+      Sustainable community impact is never a solo effort—it is built through partnership, shared resources, and collective commitment. LANI Foundation is inviting individuals, businesses, and organisations who believe in the same vision to join us.
+
+      Here's how you can be part of the movement:
+
+      * **Fuel our upcoming outreaches** with funding or in-kind support.
+      * **Sponsor vital community resources** that directly benefit vulnerable families across Lagos.
+      * **Collaborate with us on sustainable local projects** designed for long-term community empowerment, not one-off gestures.
+
+      If your organisation is looking for a credible, on-the-ground CSR partner in Nigeria—one that measures impact in real relationships, not just reach—LANI Foundation would welcome the conversation.
+
+      ### Keeping the Hope Alive on the Streets of Lagos
+
+      World Humanitarian Day may only come once a year, but the spirit behind it—solidarity, empathy, and local empowerment—is one LANI Foundation is committed to carrying forward all year round. Every conversation we have, every palliative we distribute, and every story we listen to is a small deposit into a much larger vision: a Lagos, and a Nigeria, where communities are not just supported from a distance, but genuinely empowered from within.
+
+      Ready to partner with LANI Foundation? Reach out to us today to explore how your organisation can support our community outreach and empowerment initiatives across Lagos and Nigeria.
+    `
+  },
   {
     id: 'beyond-awareness-gtco-autism-conference',
     title: 'Beyond Awareness: LANI Foundation Reflects on Autism Acceptance and Inclusion at the 16th GTCO Autism Conference',
@@ -30,6 +107,7 @@ export const articlesData: Article[] = [
     readTime: '5 min read',
     image: gtco2,
     gallery: [gtco1, gtco3],
+    galleryCaption: 'Photos from the 16th Annual GTCO Autism Conference at the MUSON Centre, Onikan, Lagos.',
     galleryDescription: 'Photos from the 16th Annual GTCO Autism Conference at the MUSON Centre, Onikan, Lagos.',
     content: `
       Autism awareness has grown significantly over the years, but awareness alone does not create inclusion. The more important question is whether our homes, schools, workplaces and communities are becoming places where individuals on the autism spectrum can participate, contribute and thrive.
@@ -96,7 +174,9 @@ export const articlesData: Article[] = [
     readTime: '5 min read',
     image: citn1,
     video: citn3,
+    videoCaption: 'Watch highlight coverage from the induction ceremony.',
     gallery: [citn2],
+    galleryCaption: 'Photos from the Bolton White Event Centre, Abuja.',
     galleryDescription: 'Photos from the Bolton White Event Centre, Abuja.',
     content: `
       LANI Foundation recently participated in the 54th Induction Ceremony of the Chartered Institute of Taxation of Nigeria (CITN), held on April 30, 2026, at the Bolton White Event Centre, Abuja. The event brought together tax professionals, industry leaders, policymakers, and newly inducted members, underscoring CITN’s continued commitment to excellence and professional integrity within Nigeria’s taxation ecosystem.
