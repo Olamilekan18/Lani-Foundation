@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { Calendar, Clock, ArrowLeft, Sparkles, BookOpen } from 'lucide-react';
+import { Calendar, Clock, ArrowLeft, Sparkles, BookOpen, X, ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { articlesData } from '../data/articles';
@@ -85,8 +85,15 @@ export default function ArticleDetail() {
   const navigate = useNavigate();
   const article = articlesData.find(art => art.id === id);
 
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
   const containerRef = useRef<HTMLDivElement>(null);
   const backBtnRef = useRef<HTMLAnchorElement>(null);
+
+  // Collect all unique images for this article
+  const allImages = article
+    ? [article.image, ...(article.gallery?.filter(img => img !== article.image) || [])]
+    : [];
 
   // Redirect if not found
   useEffect(() => {
@@ -101,6 +108,30 @@ export default function ArticleDetail() {
       document.title = `${article.title} | LANI Foundation`;
     }
   }, [article]);
+
+  // Keyboard navigation & lock scroll when lightbox is open
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setLightboxIndex(null);
+      } else if (e.key === 'ArrowLeft') {
+        setLightboxIndex(prev => (prev !== null ? (prev - 1 + allImages.length) % allImages.length : null));
+      } else if (e.key === 'ArrowRight') {
+        setLightboxIndex(prev => (prev !== null ? (prev + 1) % allImages.length : null));
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [lightboxIndex, allImages.length]);
 
   // Page entry animations
   useGSAP(() => {
@@ -153,13 +184,22 @@ export default function ArticleDetail() {
         {article.title}
       </h1>
 
-      {/* Hero Image */}
-      <div className="w-full h-[250px] sm:h-[400px] overflow-hidden rounded-3xl bg-stone-100 mb-10 shadow-md">
+      {/* Hero Image - Clickable for Full View */}
+      <div 
+        onClick={() => setLightboxIndex(0)}
+        className="w-full h-[320px] sm:h-[460px] overflow-hidden rounded-3xl bg-stone-100 mb-10 shadow-md relative group cursor-zoom-in"
+      >
         <img 
           src={article.image} 
           alt={article.title} 
-          className="w-full h-full object-cover object-top"
+          className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
         />
+        <div className="absolute inset-0 bg-stone-950/25 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+          <span className="bg-stone-900/80 backdrop-blur text-white text-xs font-bold px-4 py-2 rounded-full flex items-center gap-2 shadow-lg border border-white/20">
+            <Maximize2 className="h-3.5 w-3.5 text-lani-gold" />
+            Click to view in full
+          </span>
+        </div>
       </div>
 
       {/* Content layout */}
@@ -210,9 +250,9 @@ export default function ArticleDetail() {
             Media & Event Highlights
           </h3>
           
-          <div className="grid gap-8 md:grid-cols-2">
-            {/* Video Player Card */}
-            {article.video && (
+          {article.video ? (
+            <div className="grid gap-8 md:grid-cols-2">
+              {/* Video Player Card */}
               <div className="flex flex-col gap-3">
                 <div className="relative overflow-hidden rounded-3xl bg-stone-950 aspect-video shadow-premium border border-stone-200/80 group">
                   <video 
@@ -223,31 +263,177 @@ export default function ArticleDetail() {
                   />
                 </div>
                 <span className="text-xs text-stone-500 font-medium pl-2">
-                  Watch highlight coverage from the induction ceremony.
+                  {article.videoCaption || 'Watch video coverage.'}
                 </span>
               </div>
-            )}
 
-            {/* Gallery Images Card */}
-            {article.gallery && article.gallery.length > 0 && (
-              <div className="flex flex-col gap-3">
-                <div className={`grid gap-4 h-full ${article.video ? 'grid-cols-1' : 'grid-cols-2'}`}>
-                  {article.gallery.map((img, idx) => (
-                    <div key={idx} className="relative overflow-hidden rounded-3xl bg-stone-100 aspect-video shadow-premium group border border-stone-200/80">
+              {/* Gallery Images Card (when paired with video) */}
+              {article.gallery && article.gallery.length > 0 && (
+                <div className="flex flex-col gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 h-full">
+                    {article.gallery.map((img, idx) => {
+                      const imgIdx = allImages.indexOf(img) !== -1 ? allImages.indexOf(img) : idx;
+                      return (
+                        <div 
+                          key={idx} 
+                          onClick={() => setLightboxIndex(imgIdx)}
+                          className="relative overflow-hidden rounded-3xl bg-stone-100 aspect-video shadow-premium group border border-stone-200/80 cursor-zoom-in"
+                        >
+                          <img 
+                            src={img} 
+                            alt={`Event Highlight ${idx + 1}`} 
+                            className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                            loading="lazy"
+                          />
+                          <div className="absolute inset-0 bg-stone-950/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span className="bg-stone-900/80 backdrop-blur text-white text-[11px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1 shadow-md border border-white/20">
+                              <Maximize2 className="h-3 w-3 text-lani-gold" />
+                              View Full
+                            </span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <span className="text-xs text-stone-500 font-medium pl-2">
+                    {article.galleryCaption || 'Event and outreach photo highlights.'}
+                  </span>
+                </div>
+              )}
+            </div>
+          ) : (
+            /* Standalone Full-Width Gallery */
+            <div className="flex flex-col gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {article.gallery?.map((img, idx) => {
+                  const imgIdx = allImages.indexOf(img) !== -1 ? allImages.indexOf(img) : idx;
+                  return (
+                    <div 
+                      key={idx} 
+                      onClick={() => setLightboxIndex(imgIdx)}
+                      className="relative overflow-hidden rounded-2xl bg-stone-100 aspect-[4/3] shadow-premium group border border-stone-200/80 cursor-zoom-in"
+                    >
                       <img 
                         src={img} 
-                        alt={`Event Highlight ${idx + 1}`} 
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        alt={`Outreach Highlight ${idx + 1}`} 
+                        className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
                       />
+                      <div className="absolute inset-0 bg-stone-950/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span className="bg-stone-900/80 backdrop-blur text-white text-[11px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1 shadow-md border border-white/20">
+                          <Maximize2 className="h-3 w-3 text-lani-gold" />
+                          View Full
+                        </span>
+                      </div>
                     </div>
-                  ))}
-                </div>
-                <span className="text-xs text-stone-500 font-medium pl-2">
-                  Photos from the Bolton White Event Centre, Abuja.
-                </span>
+                  );
+                })}
               </div>
+              <span className="text-xs text-stone-500 font-medium pl-2 mt-2">
+                {article.galleryCaption || 'Event and outreach photo highlights. (Click any photo to view full resolution)'}
+              </span>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* FULLSCREEN LIGHTBOX MODAL */}
+      {lightboxIndex !== null && (
+        <div 
+          className="fixed inset-0 z-50 bg-stone-950/95 backdrop-blur-md flex flex-col justify-between p-4 sm:p-6 select-none"
+          onClick={() => setLightboxIndex(null)}
+        >
+          {/* Top Bar */}
+          <div 
+            className="flex items-center justify-between w-full max-w-7xl mx-auto z-10"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center gap-3 text-white">
+              <span className="text-xs font-mono font-bold bg-white/10 px-3 py-1.5 rounded-full border border-white/10 text-stone-200">
+                {lightboxIndex + 1} / {allImages.length}
+              </span>
+              <span className="text-xs text-stone-300 font-medium hidden sm:inline-block max-w-md truncate">
+                {article.title}
+              </span>
+            </div>
+
+            <button
+              onClick={() => setLightboxIndex(null)}
+              className="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all border border-white/10 flex items-center justify-center"
+              aria-label="Close fullscreen view"
+            >
+              <X className="h-5 w-5" />
+            </button>
+          </div>
+
+          {/* Main Stage */}
+          <div 
+            className="relative flex-1 flex items-center justify-center my-2 max-w-7xl w-full mx-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Prev button */}
+            {allImages.length > 1 && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setLightboxIndex(prev => (prev !== null ? (prev - 1 + allImages.length) % allImages.length : 0));
+                }}
+                className="absolute left-2 sm:left-4 z-10 p-3 sm:p-4 rounded-full bg-stone-900/80 hover:bg-white/20 text-white transition-all border border-white/10 shadow-lg backdrop-blur"
+                aria-label="Previous image"
+              >
+                <ChevronLeft className="h-6 w-6" />
+              </button>
+            )}
+
+            {/* Current Full Image */}
+            <div className="max-h-[75vh] max-w-full flex items-center justify-center p-2">
+              <img
+                src={allImages[lightboxIndex]}
+                alt={`${article.title} - photo ${lightboxIndex + 1}`}
+                className="max-h-[75vh] max-w-full object-contain rounded-2xl shadow-2xl transition-all duration-300"
+              />
+            </div>
+
+            {/* Next button */}
+            {allImages.length > 1 && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setLightboxIndex(prev => (prev !== null ? (prev + 1) % allImages.length : 0));
+                }}
+                className="absolute right-2 sm:right-4 z-10 p-3 sm:p-4 rounded-full bg-stone-900/80 hover:bg-white/20 text-white transition-all border border-white/10 shadow-lg backdrop-blur"
+                aria-label="Next image"
+              >
+                <ChevronRight className="h-6 w-6" />
+              </button>
             )}
           </div>
+
+          {/* Bottom Thumbnails */}
+          {allImages.length > 1 && (
+            <div 
+              className="w-full max-w-4xl mx-auto flex items-center justify-center gap-2 sm:gap-3 overflow-x-auto py-2 px-4 z-10"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {allImages.map((img, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setLightboxIndex(idx)}
+                  className={`relative flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 rounded-xl overflow-hidden border-2 transition-all ${
+                    lightboxIndex === idx
+                      ? 'border-lani-primary ring-2 ring-lani-primary/40 scale-105 opacity-100'
+                      : 'border-transparent opacity-50 hover:opacity-80'
+                  }`}
+                >
+                  <img
+                    src={img}
+                    alt={`Thumbnail ${idx + 1}`}
+                    className="w-full h-full object-cover object-center"
+                  />
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       )}
 
