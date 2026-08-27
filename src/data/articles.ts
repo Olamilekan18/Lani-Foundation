@@ -40,7 +40,6 @@ export const articlesData: Article[] = [
     readTime: '4 min read',
     image: lagosOutreach1,
     gallery: [
-      lagosOutreach1,
       lagosOutreach2,
       lagosOutreach3,
       lagosOutreach4,
@@ -65,19 +64,31 @@ export const articlesData: Article[] = [
 
       There was no stage, no distance, no performance—just people meeting people where they are.
 
+      ![LANI Foundation team distributing essential palliatives and educational materials directly on the streets of Lagos.](${lagosOutreach1})
+
+      > “Dignity begins with being heard, and solidarity begins by showing up.”
+
       ### Why Local Action Is the Real Measure of Solidarity
 
       It's easy to talk about global solidarity in the abstract. It is far harder and far more meaningful to translate it into something a person can hold in their hands or feel in a conversation. This is the leadership philosophy that anchors LANI Foundation's approach to community development in Lagos and beyond: impact is not measured by the size of an announcement, but by the depth of a connection.
 
       Real, lasting change rarely begins in a boardroom. It begins on a pavement, in a market, on a street corner—the everyday spaces where people live, struggle, and hope. This is why LANI Foundation's model of community engagement is built around proximity, not distance; around listening first, and giving second. True solidarity isn't a headline. It is a choice—a daily, deliberate decision to see, to feel, and to support the people around us.
 
+      ![Listening to the lived experiences and stories of community members in Lagos.](${lagosOutreach5})
+
       This is also, fundamentally, a leadership lesson that extends well beyond humanitarian work: organisations that lead well are organisations that stay close to the ground truth of the communities they serve. Whether in business, governance, or philanthropy, the leaders who create the most enduring impact are the ones willing to leave the boardroom and listen on the pavement.
+
+      ![Engaging with local residents and discussing practical community wellbeing.](${lagosOutreach8})
 
       ### World Humanitarian Day 2026: A Theme Built for Local Actors
 
       Nigeria's 2026 commemoration of World Humanitarian Day, themed *"Strengthening Global Solidarity and Empowering Local Communities,"* placed deliberate emphasis on the role of local actors, community organisations, businesses, and grassroots responders in protecting lives and building resilience from the ground up. It is a recognition that humanitarian impact is not the exclusive preserve of large international agencies; it is equally, and perhaps more sustainably, driven by local institutions with roots already planted in the communities they serve.
 
       LANI Foundation's Lagos outreach was a direct, practical response to that call, proof that meaningful humanitarian action doesn't have to originate from far away to be effective. Sometimes, the most strategic place to strengthen "global solidarity" is your own street.
+
+      ![LANI Foundation team and community members gathering on the streets during the outreach.](${lagosOutreach3})
+
+      > “Impact is not measured by the size of an announcement, but by the depth of a connection.”
 
       ### Partner With LANI Foundation: We Cannot Do This Alone
 
@@ -89,11 +100,15 @@ export const articlesData: Article[] = [
       * **Sponsor vital community resources** that directly benefit vulnerable families across Lagos.
       * **Collaborate with us on sustainable local projects** designed for long-term community empowerment, not one-off gestures.
 
+      ![Direct outreach meeting immediate community needs with immediate action.](${lagosOutreach2})
+
       If your organisation is looking for a credible, on-the-ground CSR partner in Nigeria—one that measures impact in real relationships, not just reach—LANI Foundation would welcome the conversation.
 
       ### Keeping the Hope Alive on the Streets of Lagos
 
       World Humanitarian Day may only come once a year, but the spirit behind it—solidarity, empathy, and local empowerment—is one LANI Foundation is committed to carrying forward all year round. Every conversation we have, every palliative we distribute, and every story we listen to is a small deposit into a much larger vision: a Lagos, and a Nigeria, where communities are not just supported from a distance, but genuinely empowered from within.
+
+      ![Connecting with community members across different parts of Lagos.](${lagosOutreach6})
 
       Ready to partner with LANI Foundation? Reach out to us today to explore how your organisation can support our community outreach and empowerment initiatives across Lagos and Nigeria.
     `

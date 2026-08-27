@@ -265,15 +265,26 @@ export default function ArticleDetail() {
                   </blockquote>
                 </div>
               );
-            case 'image':
+            case 'image': {
+              const imgUrl = block.items[1];
+              const imgIdx = allImages.indexOf(imgUrl) !== -1 ? allImages.indexOf(imgUrl) : 0;
               return (
                 <div key={idx} className="my-8 flex flex-col gap-3">
-                  <div className="w-full overflow-hidden rounded-3xl bg-stone-50 border border-stone-200/40 shadow-sm max-h-[500px] flex justify-center">
+                  <div 
+                    onClick={() => setLightboxIndex(imgIdx)}
+                    className="w-full overflow-hidden rounded-3xl bg-stone-50 border border-stone-200/40 shadow-sm max-h-[520px] flex justify-center items-center cursor-zoom-in group relative"
+                  >
                     <img 
-                      src={block.items[1]} 
+                      src={imgUrl} 
                       alt={block.items[0]} 
-                      className="max-w-full max-h-[500px] h-auto w-auto object-contain"
+                      className="max-w-full max-h-[520px] h-auto w-auto object-contain transition-transform duration-500 group-hover:scale-[1.01]"
                     />
+                    <div className="absolute inset-0 bg-stone-950/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <span className="bg-stone-900/80 backdrop-blur text-white text-xs font-bold px-3.5 py-1.5 rounded-full flex items-center gap-1.5 shadow-md border border-white/20">
+                        <Maximize2 className="h-3 w-3 text-lani-gold" />
+                        View Full
+                      </span>
+                    </div>
                   </div>
                   {block.items[0] && (
                     <span className="text-xs text-stone-500 font-medium pl-2 text-center">
@@ -282,6 +293,7 @@ export default function ArticleDetail() {
                   )}
                 </div>
               );
+            }
             case 'paragraph':
             default:
               return block.items.map((paragraphText, pIdx) => (
