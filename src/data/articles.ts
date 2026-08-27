@@ -39,16 +39,6 @@ export const articlesData: Article[] = [
     date: 'August 19, 2026',
     readTime: '4 min read',
     image: lagosOutreach1,
-    gallery: [
-      lagosOutreach2,
-      lagosOutreach3,
-      lagosOutreach4,
-      lagosOutreach5,
-      lagosOutreach6,
-      lagosOutreach7,
-      lagosOutreach8
-    ],
-    galleryCaption: 'Photo highlights from LANI Foundation’s World Humanitarian Day 2026 community outreach across Lagos.',
     content: `
       Every August, the world pauses to observe World Humanitarian Day, a moment to honour the people and institutions working, often quietly, to make life more dignified for others. In 2026, Nigeria's national observance carried a theme that felt less like a slogan and more like an instruction: **"Strengthening Global Solidarity and Empowering Local Communities."**
 
@@ -74,6 +64,8 @@ export const articlesData: Article[] = [
 
       Real, lasting change rarely begins in a boardroom. It begins on a pavement, in a market, on a street corner—the everyday spaces where people live, struggle, and hope. This is why LANI Foundation's model of community engagement is built around proximity, not distance; around listening first, and giving second. True solidarity isn't a headline. It is a choice—a daily, deliberate decision to see, to feel, and to support the people around us.
 
+      ![Walking through the streets and connecting directly with community members across Lagos.](${lagosOutreach4})
+
       ![Listening to the lived experiences and stories of community members in Lagos.](${lagosOutreach5})
 
       This is also, fundamentally, a leadership lesson that extends well beyond humanitarian work: organisations that lead well are organisations that stay close to the ground truth of the communities they serve. Whether in business, governance, or philanthropy, the leaders who create the most enduring impact are the ones willing to leave the boardroom and listen on the pavement.
@@ -87,6 +79,8 @@ export const articlesData: Article[] = [
       LANI Foundation's Lagos outreach was a direct, practical response to that call, proof that meaningful humanitarian action doesn't have to originate from far away to be effective. Sometimes, the most strategic place to strengthen "global solidarity" is your own street.
 
       ![LANI Foundation team and community members gathering on the streets during the outreach.](${lagosOutreach3})
+
+      ![Engaging with emerging youth and local workers during the outreach.](${lagosOutreach7})
 
       > “Impact is not measured by the size of an announcement, but by the depth of a connection.”
 
@@ -121,9 +115,6 @@ export const articlesData: Article[] = [
     date: 'July 28, 2026',
     readTime: '5 min read',
     image: gtco2,
-    gallery: [gtco1, gtco3],
-    galleryCaption: 'Photos from the 16th Annual GTCO Autism Conference at the MUSON Centre, Onikan, Lagos.',
-    galleryDescription: 'Photos from the 16th Annual GTCO Autism Conference at the MUSON Centre, Onikan, Lagos.',
     content: `
       Autism awareness has grown significantly over the years, but awareness alone does not create inclusion. The more important question is whether our homes, schools, workplaces and communities are becoming places where individuals on the autism spectrum can participate, contribute and thrive.
 

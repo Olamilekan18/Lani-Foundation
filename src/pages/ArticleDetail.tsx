@@ -114,9 +114,13 @@ export default function ArticleDetail() {
   const containerRef = useRef<HTMLDivElement>(null);
   const backBtnRef = useRef<HTMLAnchorElement>(null);
 
-  // Collect all unique images for this article
+  // Collect all unique images for this article (hero, in-content images, and any gallery images)
   const allImages = article
-    ? Array.from(new Set([article.image, ...(article.gallery || [])]))
+    ? Array.from(new Set([
+        article.image,
+        ...Array.from(article.content.matchAll(/!\[.*?\]\((.*?)\)/g)).map(m => m[1]),
+        ...(article.gallery || [])
+      ])).filter(Boolean)
     : [];
 
   // Redirect if not found
