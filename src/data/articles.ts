@@ -54,8 +54,6 @@ export const articlesData: Article[] = [
 
       There was no stage, no distance, no performance—just people meeting people where they are.
 
-      ![LANI Foundation team distributing essential palliatives and educational materials directly on the streets of Lagos.](${lagosOutreach1})
-
       > “Dignity begins with being heard, and solidarity begins by showing up.”
 
       ### Why Local Action Is the Real Measure of Solidarity
@@ -64,7 +62,7 @@ export const articlesData: Article[] = [
 
       Real, lasting change rarely begins in a boardroom. It begins on a pavement, in a market, on a street corner—the everyday spaces where people live, struggle, and hope. This is why LANI Foundation's model of community engagement is built around proximity, not distance; around listening first, and giving second. True solidarity isn't a headline. It is a choice—a daily, deliberate decision to see, to feel, and to support the people around us.
 
-      ![Walking through the streets and connecting directly with community members across Lagos.](${lagosOutreach4})
+      ![Directly connecting and engaging with community residents on the streets of Lagos.](${lagosOutreach4})
 
       ![Listening to the lived experiences and stories of community members in Lagos.](${lagosOutreach5})
 
@@ -80,7 +78,7 @@ export const articlesData: Article[] = [
 
       ![LANI Foundation team and community members gathering on the streets during the outreach.](${lagosOutreach3})
 
-      ![Engaging with emerging youth and local workers during the outreach.](${lagosOutreach7})
+      ![Warm interactions and heartfelt connections with local residents during the outreach.](${lagosOutreach7})
 
       > “Impact is not measured by the size of an announcement, but by the depth of a connection.”
 
