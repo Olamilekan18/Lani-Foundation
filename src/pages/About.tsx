@@ -6,6 +6,10 @@ import aniBasseyImg from '../assets/ani-charles-bassey.png';
 import luqmanImg from '../assets/luqman-musah-ozekhome.jpg';
 import philipImg from '../assets/philip-uwumarogie.jpg';
 import olaniyiImg from '../assets/olaniyi-omole.png';
+import emmanuelImg from '../assets/emmanuel-solomon.png';
+import osatoImg from '../assets/osato-oguntosin.webp';
+import danielImg from '../assets/daniel-ini-udoh.png';
+
 
 export default function About() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -153,20 +157,6 @@ export default function About() {
       image: aniBasseyImg,
     },
     {
-      id: 'luqman-musah-ozekhome',
-      name: 'Luqman Musah Ozekhome',
-      role: 'Programme Officer',
-      shortBio: 'Supports the planning, coordination, implementation, and monitoring of community development, economic empowerment, and social impact initiatives.',
-      fullBio: [
-        "Luqman Musah Ozekhome is the Programme Officer at LANI Group, where he supports the planning, coordination, implementation, and monitoring of community development, economic empowerment, and social impact initiatives.",
-        "With over five years of experience in livelihoods programming, entrepreneurship support, vocational skills development, and community-based interventions, Luqman brings expertise in programme management, stakeholder engagement, beneficiary support, and sustainable socio-economic development.",
-        "Prior to joining LANI Group, he worked across livelihood and reintegration programmes supporting vulnerable populations, including returnees, migrants, women, youth, and underserved communities through skills development, business support, and income-generating initiatives.",
-        "He holds a Higher National Diploma (HND) in Business Administration and Management from Federal Polytechnic Auchi and has completed professional training in Financial Literacy, MSME Training of Trainers, Mental Health and Psychosocial Support (MHPSS), Psychological First Aid (PFA), and Sustainable Socio-Economic Reintegration, including programmes delivered by GIZ/GOPA and the International Organization for Migration (IOM).",
-        "Luqman is passionate about strengthening community resilience, expanding economic opportunities, and driving sustainable development outcomes through innovative and people-centred programmes."
-      ],
-      image: luqmanImg,
-    },
-    {
       id: 'philip-uwumarogie',
       name: 'Philip Uwumarogie',
       role: 'Chief Technology Officer',
@@ -183,14 +173,68 @@ export default function About() {
     {
       id: 'olaniyi-omole',
       name: 'Olaniyi Omole',
-      role: 'Head of Training Services',
-      shortBio: 'Leads and coordinates training design, delivery, and quality assurance across the Group, overseeing entrepreneurship, employability, and capacity-building programmes.',
+      role: 'Deputy Consulting Lead',
+      shortBio: 'Deputy Consulting Lead coordinating consulting delivery, training design, quality assurance, and capacity-building programmes across the Group.',
       fullBio: [
-        "Olaniyi Omole is the Head of Training Services at LANI Group, where he leads and coordinates training design, delivery, and quality assurance across the Group. In this role, he oversees the development of entrepreneurship, employability, and capacity-building programmes; integrates technology to enhance training efficiency and data intelligence; and ensures governance, consistency, and impact across all training expressions within the organisation.",
+        "Olaniyi Omole is the Deputy Consulting Lead at LANI Group, where he leads and coordinates consulting delivery, training design, and quality assurance across the Group. In this role, he oversees consulting delivery, the development of entrepreneurship, employability, and capacity-building programmes; integrates technology to enhance delivery efficiency and data intelligence; and ensures governance, consistency, and impact across all consulting and capacity expressions within the organisation.",
         "With over 15 years of professional experience, Olaniyi brings strong expertise in curriculum and instructional design, training operations management, stakeholder coordination, and programme scaling. He has a proven track record in developing and managing end-to-end training pipelines, from concept development and facilitation to assessment, reporting, and continuous improvement, while aligning programmes with organisational strategy and client objectives.",
         "He holds a B.Sc. (Hons) in Political Science and a Diploma in Public Administration, supported by advanced certifications in MSME training of trainers, vocational and skills development, digital learning, and professional communication. Olaniyi is passionate about building robust, scalable, and impact-driven training systems that strengthen human capital, support enterprise growth, and deliver measurable outcomes across the LANI Group."
       ],
       image: olaniyiImg,
+    },
+    {
+      id: 'luqman-musah-ozekhome',
+      name: 'Luqman Musah Ozekhome',
+      role: 'Programme Officer',
+      shortBio: 'Supports the planning, coordination, implementation, and monitoring of community development, economic empowerment, and social impact initiatives.',
+      fullBio: [
+        "Luqman Musah Ozekhome is the Programme Officer at LANI Group, where he supports the planning, coordination, implementation, and monitoring of community development, economic empowerment, and social impact initiatives.",
+        "With over five years of experience in livelihoods programming, entrepreneurship support, vocational skills development, and community-based interventions, Luqman brings expertise in programme management, stakeholder engagement, beneficiary support, and sustainable socio-economic development.",
+        "Prior to joining LANI Group, he worked across livelihood and reintegration programmes supporting vulnerable populations, including returnees, migrants, women, youth, and underserved communities through skills development, business support, and income-generating initiatives.",
+        "He holds a Higher National Diploma (HND) in Business Administration and Management from Federal Polytechnic Auchi and has completed professional training in Financial Literacy, MSME Training of Trainers, Mental Health and Psychosocial Support (MHPSS), Psychological First Aid (PFA), and Sustainable Socio-Economic Reintegration, including programmes delivered by GIZ/GOPA and the International Organization for Migration (IOM).",
+        "Luqman is passionate about strengthening community resilience, expanding economic opportunities, and driving sustainable development outcomes through innovative and people-centred programmes."
+      ],
+      image: luqmanImg,
+    },
+    {
+      id: 'daniel-ini-udoh',
+      name: 'Daniel Ini Udoh',
+      role: 'Head of Commercials',
+      shortBio: 'Seasoned commercial leader with over 24 years of experience driving business development, sales strategy, revenue growth, and market expansion across Africa.',
+      fullBio: [
+        "Daniel Ini Udoh is a seasoned commercial and business leader with over 24 years of cross-industry experience spanning telecommunications, technology, fintech, media and entertainment, logistics and supply chain, security solutions, FMCG, and textiles. He has spent more than 15 years in senior leadership roles, with a strong track record in business development, sales, marketing, revenue growth, account management, and market expansion across both B2B and B2C environments.",
+        "Throughout his career, Daniel has led start-ups, built high-performing commercial structures, and driven go-to-market strategies in Nigeria and other African markets. His experience includes establishing sales and distribution networks, managing strategic partnerships, leading multi-channel sales teams, and delivering measurable commercial results across diverse sectors. Notable achievements include setting up MTN Nigeria's Ibadan sales region, driving subscriber acquisition at MultiChoice Nigeria, overseeing significant market share at Vlisco Netherlands B.V., and delivering revenue growth as Chief Commercial Officer at AAJ Express Logistics Limited.",
+        "Daniel combines strategic insight with operational execution, bringing expertise in technology transformation, market penetration, stakeholder management, supply chain and retail operations, and people leadership. He holds an MBA from Obafemi Awolowo University and a B.Sc. in Economics / Sociology and Anthropology from the University of Nigeria, Nsukka, alongside professional recognition from APCON."
+      ],
+      image: danielImg,
+    },
+    {
+      id: 'osato-oguntosin',
+      name: 'Osato Oguntosin',
+      role: 'Head, Corporate Services',
+      shortBio: 'Oversees business operations, human resources, and administrative functions with over a decade of expertise in process optimization, compliance, and workforce development.',
+      fullBio: [
+        "Osato Viola Oguntosin is the Head of Corporate Services at Lani Consulting Limited, a member of the LANI Group, where she oversees business operations, human resources, and administrative functions.",
+        "With over 10 years of experience spanning operations management, HR management, procurement, and strategic planning, Osato brings proven expertise in process optimization, compliance, and workforce development.",
+        "Prior to joining LANI Group, she held leadership roles at Southgate Technologies Limited, where she led corporate operations, supply chain management, and human resource initiatives.",
+        "Osato holds a Bachelor of Laws (LLB) from the University of Benin and a Barrister-at-Law (BL) from the Nigerian Law School and is an Associate Member of the Chartered Institute of Personnel Management (ACIPM).",
+        "She is passionate about building efficient systems, empowering people, and driving organizational excellence."
+      ],
+      image: osatoImg,
+    },
+    {
+      id: 'emmanuel-solomon',
+      name: 'Emmanuel Solomon',
+      role: 'Executive Team Lead, LANI Group',
+      shortBio: 'Oversees executive operations, strategic project execution, and cross-functional team coordination across the organisation to drive operational excellence.',
+      fullBio: [
+        "Emmanuel Solomon is the Executive Team Lead at LANI Group, where he oversees executive operations, strategic project execution, and cross-functional team coordination across the organisation. He works closely with leadership to drive operational excellence, improve organisational efficiency, and ensure the successful delivery of high-priority initiatives.",
+        "With over six years of experience spanning business operations, executive support, project management, content strategy, and organisational development, Emmanuel brings expertise in systems design, stakeholder management, process optimisation, and strategic execution.",
+        "Prior to joining LANI Group, he held leadership and operational roles with organisations including Joko Edu, Chop & Chat, Titaja, JOMA Technologies, and Poterby Media, supporting founders, businesses, and community-focused initiatives in scaling operations and delivering impact.",
+        "Emmanuel holds a Bachelor's degree in Educational Technology from the University of Lagos and has completed professional training in Business Management, Digital Marketing, and Content Strategy.",
+        "He is passionate about building systems that enable people and organisations to perform at their highest potential, with a particular interest in leadership development, youth empowerment, education, and organisational effectiveness."
+      ],
+      image: emmanuelImg,
     },
   ];
 

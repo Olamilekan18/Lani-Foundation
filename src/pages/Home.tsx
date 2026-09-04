@@ -274,6 +274,12 @@ export default function Home() {
       desc: 'We have focused on supporting informal care structures and community organisations to move toward more standardised, transparent, and audit-ready service models. This includes data collection, indicators, and impact templates.',
       color: 'bg-stone-400',
     },
+    {
+      period: '2026',
+      title: 'World Humanitarian Day Community Outreach & Relief',
+      desc: 'Executed direct grassroots community outreach on the streets of Lagos, delivering essential palliative food relief, active listening sessions, and wellbeing education to strengthen local solidarity.',
+      color: 'bg-lani-primary',
+    },
   ];
 
   return (

@@ -24,6 +24,7 @@ interface Project {
   desc: string;
   impact: string;
   icon: React.ReactNode;
+  articleLink?: string;
 }
 
 export default function ThematicFocus() {
@@ -48,6 +49,16 @@ export default function ThematicFocus() {
   ];
 
   const projects: Project[] = [
+    {
+      title: 'World Humanitarian Day Community Outreach & Palliative Relief',
+      category: 'inclusion',
+      tag: 'ENHANCE / Grassroots Solidarity',
+      period: '2026',
+      desc: 'In commemoration of World Humanitarian Day, we executed a direct grassroots outreach on the streets of Lagos focused on "Strengthening Global Solidarity and Empowering Local Communities." Our team engaged directly with street workers, vulnerable residents, and local youth, providing practical wellbeing education, active listening sessions, and direct distribution of essential palliative food relief.',
+      impact: 'Delivered direct palliative aid, dignity-first engagements, and community solidarity to underserved individuals across Lagos.',
+      icon: <HeartHandshake className="h-6 w-6" />,
+      articleLink: '/articles/world-humanitarian-day-2026-lagos-outreach',
+    },
     {
       title: 'Mapping of Children’s Homes, Lagos State',
       category: 'child-protection',
@@ -300,7 +311,17 @@ export default function ThematicFocus() {
               </div>
             </div>
 
-            <div className="mt-8 flex gap-3">
+            <div className="mt-8 flex flex-wrap gap-3">
+              {selectedProject.articleLink && (
+                <Link
+                  to={selectedProject.articleLink}
+                  onClick={() => setSelectedProject(null)}
+                  className="btn-primary text-center flex-1 py-2 bg-lani-navy hover:bg-lani-navy/90 text-white flex items-center justify-center gap-1.5"
+                >
+                  <BookOpen className="h-4 w-4" />
+                  Read Story
+                </Link>
+              )}
               <Link 
                 to="/get-involved" 
                 onClick={() => setSelectedProject(null)}
