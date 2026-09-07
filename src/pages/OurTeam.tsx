@@ -6,6 +6,7 @@ import nowoolaImg from '../assets/nowoola-enoch-ayomide.jpg';
 import luqmanImg from '../assets/luqman-musah-ozekhome.jpg';
 import estherImg from '../assets/esther-okpong.jpg';
 import olabisiImg from '../assets/olabisi-oyeduntan.jpg';
+import barnabasImg from '../assets/barnabas-noma-idahosa.jpg';
 import olamilekanImg from '../assets/olamilekan-kareem.jpg';
 import kehindeImg from '../assets/kehinde-ayandiran.jpg';
 import faithImg from '../assets/faith-timothy.jpg';
@@ -109,6 +110,17 @@ export default function OurTeam() {
         "Complementing her communication skills is deep expertise in performance marketing and data diagnostics. She designs targeted paid ad campaigns across Meta and Google to maximize lead generation and return on investment, leveraging revamped email marketing sequences and long-term SEO roadmaps to support sustainable organizational growth."
       ],
       image: olabisiImg,
+    },
+    {
+      id: 'barnabas-noma-idahosa',
+      name: 'Barnabas Noma-Idahosa',
+      role: 'Visual Designer & Creative Professional',
+      shortBio: 'Combines creative thinking, design, and strategy across brand identity, digital content, and visual communication to help organisations build strong identities.',
+      fullBio: [
+        "Barnabas Noma-Idahosa is a Visual Designer and Creative Professional with 5 years of experience working across brand identity, visual communication, digital content, social media, and creative direction. Having worked with 50+ brands, he combines creative thinking, design, and strategy to help organisations communicate effectively, build stronger visual identities, and connect meaningfully with their audiences. He holds a B.Eng. in Computer Engineering and has experience spanning corporate, creative, digital, and social-impact environments.",
+        "His approach to design goes beyond making things look good. He takes time to understand the idea, the audience, and the purpose behind each project, translating them into visual experiences that are clear, engaging, and intentional. From developing brand identities and campaigns to creating digital content and directing visual communication, Barnabas brings together design, storytelling, and strategy to turn ideas into work that communicates, connects, and leaves a lasting impression."
+      ],
+      image: barnabasImg,
     },
     {
       id: 'olamilekan-kareem',
