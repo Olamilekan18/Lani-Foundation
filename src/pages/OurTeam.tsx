@@ -112,15 +112,17 @@ export default function OurTeam() {
       image: olabisiImg,
     },
     {
-      id: 'barnabas-noma-idahosa',
-      name: 'Barnabas Noma-Idahosa',
-      role: 'Visual Designer & Creative Professional',
-      shortBio: 'Combines creative thinking, design, and strategy across brand identity, digital content, and visual communication to help organisations build strong identities.',
+      id: 'faith-timothy',
+      name: 'Faith Timothy',
+      role: 'Software Engineer & Systems Administrator',
+      shortBio: 'Full-stack software engineer and systems administrator managing enterprise cloud environments, internal automation workflows, and responsive web applications at LANI.',
       fullBio: [
-        "Barnabas Noma-Idahosa is a Visual Designer and Creative Professional with 5 years of experience working across brand identity, visual communication, digital content, social media, and creative direction. Having worked with 50+ brands, he combines creative thinking, design, and strategy to help organisations communicate effectively, build stronger visual identities, and connect meaningfully with their audiences. He holds a B.Eng. in Computer Engineering and has experience spanning corporate, creative, digital, and social-impact environments.",
-        "His approach to design goes beyond making things look good. He takes time to understand the idea, the audience, and the purpose behind each project, translating them into visual experiences that are clear, engaging, and intentional. From developing brand identities and campaigns to creating digital content and directing visual communication, Barnabas brings together design, storytelling, and strategy to turn ideas into work that communicates, connects, and leaves a lasting impression."
+        "Faith Timothy is a versatile and impact-driven Full-Stack Software Engineer and Systems Administrator currently serving as Tech Intern at LANI, where he administers enterprise cloud environments and develops custom digital tools to enhance operational efficiency.",
+        "At LANI, he manages Microsoft 365 enterprise infrastructure for active users—overseeing account provisioning, directory security policies, and license allocation—while designing custom Power Apps and automated workflows that streamline cross-functional business processes.",
+        "His engineering expertise spans JavaScript (ES6+), TypeScript, Node.js, Python, PostgreSQL, and RESTful API architecture. He actively builds responsive web applications and internal tools, having contributed to the development of the LANI Foundation website and designed digital platforms including the LANI Creatives Agency Studio web experience.",
+        "Beyond backend systems and cloud administration, Faith integrates UI/UX product design principles using Figma design systems and auto-layout component architectures. Currently pursuing a Bachelor's Degree in Computer Science at the University of Uyo, he holds industry certifications from IBM SkillsBuild, Cisco Networking Academy, and Tech Sphere Academy."
       ],
-      image: barnabasImg,
+      image: faithImg,
     },
     {
       id: 'olamilekan-kareem',
@@ -136,17 +138,15 @@ export default function OurTeam() {
       image: olamilekanImg,
     },
     {
-      id: 'faith-timothy',
-      name: 'Faith Timothy',
-      role: 'Software Engineer & Systems Administrator',
-      shortBio: 'Full-stack software engineer and systems administrator managing enterprise cloud environments, internal automation workflows, and responsive web applications at LANI.',
+      id: 'barnabas-noma-idahosa',
+      name: 'Barnabas Noma-Idahosa',
+      role: 'Visual Designer & Creative Professional',
+      shortBio: 'Combines creative thinking, design, and strategy across brand identity, digital content, and visual communication to help organisations build strong identities.',
       fullBio: [
-        "Faith Timothy is a versatile and impact-driven Full-Stack Software Engineer and Systems Administrator currently serving as Tech Intern at LANI, where he administers enterprise cloud environments and develops custom digital tools to enhance operational efficiency.",
-        "At LANI, he manages Microsoft 365 enterprise infrastructure for active users—overseeing account provisioning, directory security policies, and license allocation—while designing custom Power Apps and automated workflows that streamline cross-functional business processes.",
-        "His engineering expertise spans JavaScript (ES6+), TypeScript, Node.js, Python, PostgreSQL, and RESTful API architecture. He actively builds responsive web applications and internal tools, having contributed to the development of the LANI Foundation website and designed digital platforms including the LANI Creatives Agency Studio web experience.",
-        "Beyond backend systems and cloud administration, Faith integrates UI/UX product design principles using Figma design systems and auto-layout component architectures. Currently pursuing a Bachelor's Degree in Computer Science at the University of Uyo, he holds industry certifications from IBM SkillsBuild, Cisco Networking Academy, and Tech Sphere Academy."
+        "Barnabas Noma-Idahosa is a Visual Designer and Creative Professional with 5 years of experience working across brand identity, visual communication, digital content, social media, and creative direction. Having worked with 50+ brands, he combines creative thinking, design, and strategy to help organisations communicate effectively, build stronger visual identities, and connect meaningfully with their audiences. He holds a B.Eng. in Computer Engineering and has experience spanning corporate, creative, digital, and social-impact environments.",
+        "His approach to design goes beyond making things look good. He takes time to understand the idea, the audience, and the purpose behind each project, translating them into visual experiences that are clear, engaging, and intentional. From developing brand identities and campaigns to creating digital content and directing visual communication, Barnabas brings together design, storytelling, and strategy to turn ideas into work that communicates, connects, and leaves a lasting impression."
       ],
-      image: faithImg,
+      image: barnabasImg,
     },
     {
       id: 'kehinde-ayandiran',
