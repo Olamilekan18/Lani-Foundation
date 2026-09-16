@@ -4,7 +4,6 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import nowoolaImg from '../assets/nowoola-enoch-ayomide.jpg';
 import luqmanImg from '../assets/luqman-musah-ozekhome.jpg';
-import estherImg from '../assets/esther-okpong.jpg';
 import olabisiImg from '../assets/olabisi-oyeduntan.jpg';
 import barnabasImg from '../assets/barnabas-noma-idahosa.jpg';
 import olamilekanImg from '../assets/olamilekan-kareem.jpg';
@@ -84,19 +83,6 @@ export default function OurTeam() {
         "Luqman is passionate about strengthening community resilience, expanding economic opportunities, and driving sustainable development outcomes through innovative and people-centred programmes."
       ],
       image: luqmanImg,
-    },
-    {
-      id: 'esther-okpong',
-      name: 'Esther Okpong',
-      role: 'Accountant',
-      shortBio: 'Finance and accounting professional specializing in financial reporting, budgeting, tax compliance, and automated AI-driven financial workflows.',
-      fullBio: [
-        "Esther Okpong is a Finance and Accounting professional specializing in the intersection of finance, technology, data, and business operations. Currently serving as the Accountant at LANI Group, she manages financial reporting, cash management, budgeting, and tax compliance to support executive decision-making.",
-        "Esther's diverse background includes managing blockchain and digital asset transactions at CratD2C and streamlining commercial workflows at CrownCrystal Technology. Her professional experience spans traditional corporate finance as well as emerging digital environments.",
-        "As an Accountant at CratD2C Decentralized Autonomous Smartchain, she managed and reconciled over 20,000 monthly blockchain and digital asset transactions, prepared financial reports and cash flow analyses, and supported the strengthening of financial controls and reporting accuracy.",
-        "A proponent of AI-driven finance, she has designed automation workflows that cut manual data processing by 40%. Certified in data analysis and visualization, Esther leverages financial controls, risk management, and innovative technology to drive operational efficiency and sustainable business growth."
-      ],
-      image: estherImg,
     },
     {
       id: 'olabisi-oyeduntan',
